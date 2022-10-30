@@ -1,0 +1,45 @@
+body {
+    background-color: #001740;
+    color: #aaaa99;
+    margin: 0;
+}
+header {
+    height: 10vh;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 3px solid #aaaa99;
+}
+main {
+    height: 80vh;
+    display: grid;
+    grid-template-columns: 2fr 4fr ;
+}
+.main-screen {
+    border: 1px solid red;
+    padding: 20px;
+}
+.description {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: flex-start;
+    border: 1px solid #aaaa99;
+}
+.input {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+footer{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    height: 5vh;
+    width: 100vw;
+}
