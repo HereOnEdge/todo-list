@@ -69,6 +69,57 @@ li.open::before {
     justify-content: center;
     align-items: center;
 }
+input[type=text] {
+    background-color: #001740;
+    color:red;
+    border: none;
+}
+input[type=text]:focus {
+    border: none;
+    outline: none;
+}
+.newProject {
+    display: grid;
+    width: 60%;
+    grid-template-columns: 35px 1fr ;
+    grid-template-rows: 35px;
+    grid-auto-rows: 35px;
+    grid-auto-columns: 35px 1fr;
+    transition: 0.6s;
+    border-bottom: 1px solid red;
+}
+.plusSign{
+    grid-area: 1 / 1 / 2 /2;
+    width: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    aspect-ratio: 1/1;
+    color: red;
+    cursor: pointer;
+    font-size: 32px;
+    transition: 0.4s;
+}
+#projectName-input {
+    grid-area: 1 / 2 / 2 /3;
+}
+#projectDesc-input {
+    grid-area: 2 / 2 / 3 / 3;
+}
+#projectDate-input {
+    grid-area: 3 / 2 / 4 / 3;
+}
+#projectType-input {
+    grid-area: 4 / 2 / 5 /3;
+}
+.plusSign:hover {
+    color: aqua;
+    font-size: 40px;
+}
+.plusSign:active {
+    transform: scale(0.7);
+}
 footer{
     text-align: center;
     display: flex;
