@@ -27,6 +27,42 @@ main {
     align-items: flex-start;
     border: 1px solid #aaaa99;
 }
+ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 10px;
+    height: 50%;
+}
+li {
+    cursor: pointer;
+    list-style: none;
+}
+li:hover {
+    text-decoration: underline;
+    color: aqua;
+}
+li:active {
+    color: #aaaa99;
+}
+li::before {
+    content: "";
+    border-color: red;
+    border-width: 0 1px 1px 0;
+    border-style: solid;
+    rotate: -45deg;
+    margin-top: 3px;
+    aspect-ratio: 1/1;
+    width: 9px;
+    position: absolute;
+    left: 20px;
+    transition: 0.6s;
+}
+li.open::before {
+    rotate: 45deg;
+    border-color: aqua;
+}
+
 .input {
     width: 100%;
     display: flex;
