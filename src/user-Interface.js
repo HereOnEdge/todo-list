@@ -54,17 +54,22 @@ let projectInfo = () => {
     projectType.id = "projectType-input";
     // create an option for each type available
     let types = ["Work" , "Workout", "Educate", "Personal", "Day To Day"];
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.textContent= "Select Project Type"
+    defaultOption.setAttribute("disabled",'');
+    defaultOption.setAttribute("selected",'');
+    projectType.appendChild(defaultOption);
     for(let i=0; i< types.length; i++ ){
         let option = document.createElement("option");
         option.value = types[i];
         option.textContent = types[i];
         projectType.appendChild(option);
     }
-    
+    newProject.style.height = "140px"
     newProject.appendChild(projectDesc);
     newProject.appendChild(projectDate);
-    newProject.appendChild(projectType)
-    
+    newProject.appendChild(projectType);
 }
 // when plus button is clicked check for required information before adding a new project 
 let projectAdder = () => {

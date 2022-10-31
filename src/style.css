@@ -71,7 +71,7 @@ li.open::before {
 }
 input[type=text] {
     background-color: #001740;
-    color:red;
+    color:#aaaa99;
     border: none;
 }
 input[type=text]:focus {
@@ -80,13 +80,15 @@ input[type=text]:focus {
 }
 .newProject {
     display: grid;
-    width: 60%;
+    width: max(205px , 40%);
     grid-template-columns: 35px 1fr ;
     grid-template-rows: 35px;
     grid-auto-rows: 35px;
     grid-auto-columns: 35px 1fr;
+    height: 35px;
     transition: 0.6s;
     border-bottom: 1px solid red;
+    overflow: hidden;
 }
 .plusSign{
     grid-area: 1 / 1 / 2 /2;
@@ -99,7 +101,7 @@ input[type=text]:focus {
     color: red;
     cursor: pointer;
     font-size: 32px;
-    transition: 0.4s;
+    transition: 0.2s;
 }
 #projectName-input {
     grid-area: 1 / 2 / 2 /3;
@@ -109,16 +111,29 @@ input[type=text]:focus {
 }
 #projectDate-input {
     grid-area: 3 / 2 / 4 / 3;
+    background-color: #001740;
+    color: #aaaa99;
+    border: none;
+    width: min(165px , 100%);
+}
+#projectDate-input:focus {
+    outline: none;
 }
 #projectType-input {
     grid-area: 4 / 2 / 5 /3;
+    background-color: #001740;
+    color: #aaaa99;
+    border: none;
+    width: min(165px , 100%);
+}
+#projectType-input:focus {
+    outline: none;
 }
 .plusSign:hover {
     color: aqua;
-    font-size: 40px;
 }
 .plusSign:active {
-    transform: scale(0.7);
+    transform: scale(0.5);
 }
 footer{
     text-align: center;
