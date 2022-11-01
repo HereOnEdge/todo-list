@@ -17,8 +17,13 @@ main {
     grid-template-columns: 2fr 4fr ;
 }
 .main-screen {
+    display: flex;
+    flex-direction: column;
+    align-items:baseline;
+    justify-content: baseline;
     border: 1px solid red;
     padding: 20px;
+    height: max(75vh , 300px);
 }
 .description {
     display: flex;
@@ -27,25 +32,30 @@ main {
     align-items: flex-start;
     border: 1px solid #aaaa99;
 }
-ul {
+.nav {
+    height: 19px;
+    overflow: hidden;
+    transition: 0.2s ;
+}
+.nav-ul {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     gap: 10px;
     height: 50%;
 }
-li {
+.nav {
     cursor: pointer;
     list-style: none;
 }
-li:hover {
+.nav:hover {
     text-decoration: underline;
     color: aqua;
 }
-li:active {
+.nav:active {
     color: #aaaa99;
 }
-li::before {
+.nav::before {
     content: "";
     border-color: red;
     border-width: 0 1px 1px 0;
@@ -55,14 +65,21 @@ li::before {
     aspect-ratio: 1/1;
     width: 9px;
     position: absolute;
-    left: 20px;
+    margin-left: -20px;
     transition: 0.6s;
 }
-li.open::before {
+.nav.open::before {
     rotate: 45deg;
     border-color: aqua;
 }
+li.nav.open {
+    padding-top: 10px;
+}
 
+.myProjects {
+    margin-top: 70px;
+    margin-left: 10px;
+}
 .input {
     width: 100%;
     display: flex;
@@ -88,7 +105,7 @@ input[type=text]:focus {
     justify-items: baseline;
     align-items: center;
     height: 35px;
-    transition: 0.6s;
+    transition: 0.3s;
     border-bottom: 1px solid red;
     overflow: hidden;
 }

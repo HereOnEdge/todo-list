@@ -1,5 +1,6 @@
 import Project from "./Project.js";
 import { projectArray } from "./Project.js";
+import { myProjects as navProjects } from "./navbar-ui.js";
 
 // display projects on main screen
 export default (function projectsDisplayer() {
@@ -15,14 +16,15 @@ export default (function projectsDisplayer() {
         title.textContent = "Projects";
         mainScreen.appendChild(title);
         addProject();
+        myProjects();
 
     })
 })()
 // new project section
 let addProject = () => {
     const mainScreen = document.querySelector(".main-screen");
-    let newProject = undefined ;
-    if(document.querySelector(".newProject")){
+    let newProject = undefined;
+    if (document.querySelector(".newProject")) {
         newProject = document.querySelector(".newProject")
     } else {
         newProject = document.createElement("div");
@@ -111,23 +113,34 @@ let projectAdder = () => {
             projectType.remove();
             plusSign.remove();
             addProject();
+            myProjects();
+            navProjects();  
             console.log(projectArray)
         }
     })
 }
-// display collapsing window for each navbar item
-export let navbarController = (() => {
-    const navigators = document.querySelectorAll(".nav");
-    for (let nav of navigators) {
-        nav.addEventListener("click", () => {
-            nav.classList.toggle("open")
-        })
-    }
-})()
 
 // close add project collapsing window
 function closeInfo() {
     let newProject = document.querySelector(".newProject");
     newProject.style.height = "35px"
     console.log("height changed")
+}
+
+// show projects that are already in progress
+function myProjects() {
+    if (document.querySelector(".myProjects")){
+        document.querySelector(".myProjects").remove();
+        console.log("ran again")
+    }
+    let mainScreen = document.querySelector(".main-screen");
+    let ul = document.createElement("ul");
+    ul.classList.add("myProjects");
+    mainScreen.appendChild(ul);
+    for (let i = 0; i < projectArray.length; i++){
+        let project = document.createElement("li");
+        project.classList.add("project")
+        project.textContent = projectArray[i].name;
+        ul.appendChild(project)
+    }
 }
