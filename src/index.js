@@ -1,3 +1,3 @@
 import "./style.css";
-import projectsDisplayer from "./user-Interface";
-import { navbarController } from "./user-Interface";
+import projectsDisplayer from "./projects-page-ui";
+import { navbarController } from "./projects-page-ui";
