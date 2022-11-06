@@ -14,7 +14,7 @@ header {
 main {
     height: 80vh;
     display: grid;
-    grid-template-columns: 2fr 4fr ;
+    grid-template-columns: 1fr 4fr ;
 }
 .main-screen {
     display: flex;
@@ -22,8 +22,20 @@ main {
     align-items:baseline;
     justify-content: baseline;
     border: 1px solid red;
+    gap: 10%;
     padding: 20px;
     height: max(75vh , 300px);
+    overflow: scroll;
+}
+.main-screen::-webkit-scrollbar {
+    display: none;
+}
+.top-screen {
+    width: 100%;
+}
+.bottom-screen {
+    height: 70%;
+    width: 100%;
 }
 .description {
     display: flex;
@@ -35,27 +47,36 @@ main {
 .nav {
     height: 19px;
     overflow: hidden;
-    transition: 0.2s ;
+    transition: 0.6s ;
+}
+.navbar {
+    height: 100%;
 }
 .nav-ul {
+    margin: 0;
+    padding-left: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content:flex-end;
     gap: 10px;
-    height: 50%;
+    height: 100%;
 }
 .nav {
-    cursor: pointer;
     list-style: none;
-}
-.nav:hover {
-    text-decoration: underline;
-    color: aqua;
 }
 .nav:active {
     color: #aaaa99;
 }
-.nav::before {
+#title-span {
+    cursor: pointer;
+    position: relative;
+    margin-left: 10px;
+}
+#title-span:hover {
+    text-decoration: underline;
+    color: aqua;
+}
+#title-span::before {
     content: "";
     border-color: red;
     border-width: 0 1px 1px 0;
@@ -64,21 +85,130 @@ main {
     margin-top: 3px;
     aspect-ratio: 1/1;
     width: 9px;
-    position: absolute;
+    position: fixed;
     margin-left: -20px;
     transition: 0.6s;
 }
-.nav.open::before {
+.nav.open #title-span::before {
     rotate: 45deg;
     border-color: aqua;
 }
 li.nav.open {
     padding-top: 10px;
+    font-size: 22px;
+}
+.myProjects {
+    width: clamp( 200px,50% , 350px);
+    margin: 0 auto;
+    padding: 15px 0;
+    border-radius: 10px;
+    box-shadow: 0 0 50px 5px #000020;
+}
+.Projects-ul {
+    padding-left: 38px;
+    width: calc(100% - 38px);
+    margin: 0;
+    list-style:none;
+    display: grid;
+    grid-template-columns: 80% 20%;
+    grid-template-rows:auto;
+    grid-auto-rows: auto;
+    grid-auto-columns: 80% 20%;
+    row-gap: 7px;
+    position: relative;
+}
+.myProject {
+    font-size: 15px;
+    padding-top: 5px;
+    padding-left: 20px;
+    list-style: none;
+}
+.myProject li:hover {
+    background-color: #000020;
+    text-decoration: none;
+}
+.project {
+    font-weight: 600;
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    border-color: rgba(200,200,200,0.3);
+    border-radius: 10px;
+    padding-bottom: 7px;
+    position: relative;
+    padding-left: 5px;
+    transition: 0.3s;
+}
+.project.open {
+    box-shadow: 0 2px 5px 1px rgba(200,200,200,0.3);
+    font-size: 20px;
+    scale: 1.1;
+}
+.project:hover {
+    box-shadow: 0 5px 8px 1px rgba(200,200,200,0.3);
+    margin-bottom: 10px;
+    margin-top: 5px;
+    scale: 1.1;
+}
+.project.open .pp-spanTitle::before {
+    rotate: 45deg;
+    transition: 0.3s;
+    border-color: aqua;
+}
+.edit-span {
+    font-size: 2rem;
+    display: flex;
+    align-items:flex-end;
+    justify-content: center;
+    text-align: center;
+    height: 20px;
+}
+.edit-span::before {
+    content: '';
+    position: absolute;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid red;
+    rotate: 0;
+    aspect-ratio: 1 /1 ;
+}
+.edit-span::after {
+    content: '';
+    position: absolute;
+    width: 35px;
+    height: 60px;
+    background-color: rgba(20,20,20,0.7);
+    margin-bottom: -59px;
+}
+.pp-spanTitle::before {
+    content: '';
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    border-color: red;
+    rotate: -45deg;
+    position:absolute;
+    left: -10px;
+    top: 5px;
+    width: 5px;
+    aspect-ratio: 1 / 1;
+    transition: 0.3s;
 }
 
-.myProjects {
-    margin-top: 70px;
-    margin-left: 10px;
+.pp-spanTitle {
+    display: block;
+    width: 100%;
+    cursor: pointer;
+}
+.pp-spanTitle:nth-child(1) {
+    text-transform: capitalize;
+}
+
+h2 {
+    font-size: 35px;
+    margin-top: 0;
+}
+h3 {
+    font-size: 28px;
+    margin-top: 0;
 }
 .input {
     width: 100%;
@@ -97,7 +227,7 @@ input[type=text]:focus {
 }
 .newProject {
     display: grid;
-    width: max(205px , 40%);
+    width: max(205px , 30%);
     grid-template-columns: 35px 1fr ;
     grid-template-rows: 35px;
     grid-auto-rows: 35px;
@@ -105,9 +235,8 @@ input[type=text]:focus {
     justify-items: baseline;
     align-items: center;
     height: 35px;
-    transition: 0.3s;
-    border-bottom: 1px solid red;
-    overflow: hidden;
+    transition: 0.6s;
+    overflow: hidden;font-size: 10px;
 }
 .plusSign{
     grid-area: 1 / 1 / 2 /2;
@@ -119,7 +248,7 @@ input[type=text]:focus {
     aspect-ratio: 1/1;
     color: red;
     cursor: pointer;
-    font-size: 32px;
+    font-size: 28px;
     transition: 0.2s;
 }
 #projectName-input {

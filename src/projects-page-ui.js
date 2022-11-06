@@ -11,10 +11,16 @@ export default (function projectsDisplayer() {
             return;
         }
         mainScreen.innerHTML = "";
+        const topScreen = document.createElement("div");
+        topScreen.classList.add("top-screen");
+        const bottomScreen = document.createElement("div");
+        bottomScreen.classList.add("bottom-screen");
+        mainScreen.appendChild(topScreen);
+        mainScreen.appendChild(bottomScreen);
         console.log("clears main screen")
         const title = document.createElement("h2");
-        title.textContent = "Projects";
-        mainScreen.appendChild(title);
+        title.textContent = "Title here";
+        topScreen.appendChild(title);
         addProject();
         myProjects();
 
@@ -22,14 +28,14 @@ export default (function projectsDisplayer() {
 })()
 // new project section
 let addProject = () => {
-    const mainScreen = document.querySelector(".main-screen");
+    const topScreen = document.querySelector(".top-screen");
     let newProject = undefined;
     if (document.querySelector(".newProject")) {
         newProject = document.querySelector(".newProject")
     } else {
         newProject = document.createElement("div");
         newProject.classList.add("newProject");
-        mainScreen.appendChild(newProject);
+        topScreen.appendChild(newProject);
     }
     let projectName = document.createElement("input");
     projectName.type = "text";
@@ -114,7 +120,7 @@ let projectAdder = () => {
             plusSign.remove();
             addProject();
             myProjects();
-            navProjects();  
+            navProjects();
             console.log(projectArray)
         }
     })
@@ -129,18 +135,48 @@ function closeInfo() {
 
 // show projects that are already in progress
 function myProjects() {
-    if (document.querySelector(".myProjects")){
+    if (document.querySelector(".myProjects")) {
         document.querySelector(".myProjects").remove();
-        console.log("ran again")
+        document.querySelector(".bottom-title").remove();
     }
-    let mainScreen = document.querySelector(".main-screen");
+    let bottomScreen = document.querySelector(".bottom-screen");
+    let projectsSection = document.createElement("div")
+    projectsSection.classList.add("myProjects")
     let ul = document.createElement("ul");
-    ul.classList.add("myProjects");
-    mainScreen.appendChild(ul);
-    for (let i = 0; i < projectArray.length; i++){
+    ul.classList.add("Projects-ul");
+    let title = document.createElement("h3");
+    title.classList.add("bottom-title");
+    title.textContent = "title here";
+    projectsSection.appendChild(ul);
+    bottomScreen.appendChild(title);
+    bottomScreen.appendChild(projectsSection);
+    for (let i = 0; i < projectArray.length; i++) {
         let project = document.createElement("li");
         project.classList.add("project")
-        project.textContent = projectArray[i].name;
-        ul.appendChild(project)
+        let editSpan = document.createElement("span");
+        editSpan.classList.add("edit-span")
+        editSpan.textContent = "..."
+        ul.appendChild(project);
+        ul.appendChild(editSpan);
     }
+    detailShower();
+}
+// open each project info on click
+let detailShower = () => {
+    let projects = document.querySelectorAll(".project");
+    let i = 0;
+    for(let project of projects) {
+        const spanTitle = document.createElement("span");
+        spanTitle.classList.add("pp-spanTitle")
+        project.appendChild(spanTitle);
+        spanTitle.textContent = `${projectArray[i].name}`
+        i++ ;
+        spanTitle.addEventListener("click", () => {
+            project.classList.toggle("open")
+        })
+    }
+}
+// make each 3dot edit button functional
+let editDots = () => {
+    
 }
