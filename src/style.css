@@ -161,23 +161,55 @@ li.nav.open {
     justify-content: center;
     text-align: center;
     height: 20px;
+    cursor: pointer;
 }
-.edit-span::before {
-    content: '';
+.layout-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     position: absolute;
+    height: min(70px, 10vh);
+    width: clamp(35px , 10vw, 60px);
+    right: clamp(-50px,-9vw,-30px);
+    /* right: -10vw; */
+    top: min(calc(-3vh + 3px), -16px);
+}
+.triangle {
+    content: '';
+    position: relative;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-bottom: 5px solid red;
-    rotate: 0;
+    border-bottom: 5px solid rgba(0,120,195,1);
+    rotate: -90deg;
+    margin-right: -3px;
+    width: 0;
     aspect-ratio: 1 /1 ;
+    flex: 0;
 }
-.edit-span::after {
-    content: '';
-    position: absolute;
-    width: 35px;
-    height: 60px;
-    background-color: rgba(20,20,20,0.7);
-    margin-bottom: -59px;
+.edit-mainBox {
+    position: relative;
+    width: 100%;
+    background-color: rgba(0,120,195,1);
+    border-radius: 10px;
+    flex: 10 1 35px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    padding-left: 3px;
+}
+.option {
+    width: 45%;
+    aspect-ratio: 1 /1;
+    justify-content: stretch;
+    flex: 0 1 auto;
+}
+.icon {
+    position: relative;
+    width: 80%;
+    margin: 0 auto;
 }
 .pp-spanTitle::before {
     content: '';

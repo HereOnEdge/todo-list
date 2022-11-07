@@ -1,6 +1,10 @@
 import Project from "./Project.js";
 import { projectArray } from "./Project.js";
 import { myProjects as navProjects } from "./navbar-ui.js";
+import doneImgUrl from "./img/checklist.png";
+import editImgUrl from "./img/edit-icon.png";
+import removeImgUrl from "./img/remove-icon.png";
+import infoImgUrl from "./img/info-icon.png";
 
 // display projects on main screen
 export default (function projectsDisplayer() {
@@ -154,23 +158,26 @@ function myProjects() {
         let project = document.createElement("li");
         project.classList.add("project")
         let editSpan = document.createElement("span");
-        editSpan.classList.add("edit-span")
+        editSpan.classList.add("edit-span");
+        editSpan.id = i;
+        editSpan.style["grid-area"] = `${i + 1} / 2 / span 1 / span 1`
         editSpan.textContent = "..."
         ul.appendChild(project);
         ul.appendChild(editSpan);
     }
     detailShower();
+    editDots();
 }
 // open each project info on click
 let detailShower = () => {
     let projects = document.querySelectorAll(".project");
     let i = 0;
-    for(let project of projects) {
+    for (let project of projects) {
         const spanTitle = document.createElement("span");
         spanTitle.classList.add("pp-spanTitle")
         project.appendChild(spanTitle);
         spanTitle.textContent = `${projectArray[i].name}`
-        i++ ;
+        i++;
         spanTitle.addEventListener("click", () => {
             project.classList.toggle("open")
         })
@@ -178,5 +185,65 @@ let detailShower = () => {
 }
 // make each 3dot edit button functional
 let editDots = () => {
-    
+    let container = document.querySelector(".Projects-ul");
+    let dotsButtons = document.querySelectorAll(".edit-span");
+    for (let i = 0; i < dotsButtons.length; i++) {
+        dotsButtons[i].addEventListener("click", () => {
+            if(document.querySelector(".layout-container")) {
+                document.querySelector(".layout-container").remove();
+            }
+            let layoutContainer = document.createElement("div");
+            layoutContainer.classList.add("layout-container");
+            container.appendChild(layoutContainer);
+            layoutContainer.style["grid-area"] = `${i + 1} / 2 / span 1 / span 1`
+            let triangle = document.createElement("div");
+            triangle.classList.add("triangle");
+            layoutContainer.appendChild(triangle);
+            let mainBox = document.createElement("div");
+            mainBox.classList.add("edit-mainBox");
+            layoutContainer.appendChild(mainBox);
+            let delButton = document.createElement("div");
+            delButton.classList.add("del-button");
+            delButton.classList.add("option");
+            let removeIcon = document.createElement("img");
+            removeIcon.classList.add("icon");
+            removeIcon.src = removeImgUrl;
+            removeIcon.alt = "remove icon";
+            delButton.appendChild(removeIcon);
+            mainBox.appendChild(delButton);
+            let editButton = document.createElement("div");
+            editButton.classList.add("edit-button");
+            editButton.classList.add("option")
+            let editIcon = document.createElement("img");
+            editIcon.src = editImgUrl;
+            editIcon.alt = "edit icon"
+            editIcon.classList.add("icon");
+            editButton.appendChild(editIcon);
+            mainBox.appendChild(editButton);
+            let completeButton = document.createElement("div");
+            completeButton.classList.add("complete-button");
+            completeButton.classList.add("option");
+            let doneIcon = document.createElement("img")
+            doneIcon.classList.add("icon");
+            doneIcon.src = doneImgUrl;
+            doneIcon.alt = "done icon";
+            completeButton.appendChild(doneIcon);
+            mainBox.appendChild(completeButton);
+            let infoButton = document.createElement("div");
+            infoButton.classList.add("info-button");
+            infoButton.classList.add("option");
+            let infoIcon = document.createElement("img");
+            infoIcon.classList.add("icon");
+            infoIcon.src = infoImgUrl;
+            infoIcon.alt = "info icon";
+            infoButton.appendChild(infoIcon);
+            mainBox.appendChild(infoButton);
+        })
+    }
+
+
+}
+// display edit options for 3dot edit button
+let disOptions = () => {
+
 }
