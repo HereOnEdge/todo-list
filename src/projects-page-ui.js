@@ -161,7 +161,10 @@ function myProjects() {
         editSpan.classList.add("edit-span");
         editSpan.id = i;
         editSpan.style["grid-area"] = `${i + 1} / 2 / span 1 / span 1`
-        editSpan.textContent = "..."
+        let dots = document.createElement("span")
+        dots.classList.add("dots");
+        dots.textContent = "..."
+        editSpan.appendChild(dots);
         ul.appendChild(project);
         ul.appendChild(editSpan);
     }
