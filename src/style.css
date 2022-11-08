@@ -21,7 +21,6 @@ main {
     flex-direction: column;
     align-items:baseline;
     justify-content: baseline;
-    border: 1px solid red;
     gap: 10%;
     padding: 20px;
     height: max(75vh , 300px);
@@ -36,6 +35,10 @@ main {
 .bottom-screen {
     height: 70%;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 .description {
     display: flex;
@@ -60,6 +63,8 @@ main {
     justify-content:flex-end;
     gap: 10px;
     height: 100%;
+    border-right: 1px solid #aaaa99;
+    border-bottom: 1px solid #aaaa99;
 }
 .nav {
     list-style: none;
@@ -98,8 +103,9 @@ li.nav.open {
     font-size: 22px;
 }
 .myProjects {
-    width: clamp( 200px,50% , 350px);
-    margin: 0 auto;
+    width: clamp( 300px,90vw , 550px);
+    height: clamp(200px, 100%, 1000px);
+    margin-bottom: 10vh;
     padding: 15px 0;
     border-radius: 10px;
     box-shadow: 0 0 50px 5px #000020;
@@ -163,6 +169,11 @@ li.nav.open {
     height: 20px;
     cursor: pointer;
 }
+.edit-span:hover , .edit-span:active {
+    /* box-shadow: 0 3px 5px 0 #aaaa99; */
+    border-right: 2px solid rgba(0,120,195,1);
+    color: rgba(0,120,195,1);
+}
 .layout-container {
     display: flex;
     flex-direction: row;
@@ -173,7 +184,7 @@ li.nav.open {
     width: clamp(35px , 10vw, 60px);
     right: clamp(-50px,-9vw,-30px);
     /* right: -10vw; */
-    top: min(calc(-3vh + 3px), -16px);
+    top: min(calc(-3vh + 5px), -19px);
 }
 .triangle {
     content: '';
@@ -204,12 +215,13 @@ li.nav.open {
     width: 45%;
     aspect-ratio: 1 /1;
     justify-content: stretch;
-    flex: 0 1 auto;
+    flex: 1 1 auto;
 }
 .icon {
+    max-width: 80%;
     position: relative;
-    width: 80%;
     margin: 0 auto;
+    object-fit: fill;
 }
 .pp-spanTitle::before {
     content: '';
