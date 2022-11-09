@@ -117,8 +117,8 @@ li.nav.open {
     list-style:none;
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows:40px;
-    grid-auto-rows: 40px;
+    grid-template-rows:auto;
+    grid-auto-rows: auto;
     grid-auto-columns: 100%;
     column-gap: 10px;
     row-gap: 7px;
@@ -164,8 +164,6 @@ li.nav.open {
     box-shadow: 0 5px 8px 1px rgba(0,120,195,1);
     color: rgba(0,120,195,1);
     background-color: rgba(200,200,200,0.1);
-    margin-bottom: 10px;
-    margin-top: 5px;
 }
 .project.open .pp-spanTitle::before {
     rotate: 45deg;
@@ -181,11 +179,13 @@ li.nav.open {
     width: 100%;
     cursor: pointer;
     border-radius: 50%;
+    transition: 0.3s;
 }
 .edit-span:hover , .edit-span:active {
     /* box-shadow: 0 3px 5px 0 #aaaa99; */
     color: rgba(0,120,195,1);
     background-color: rgba(200,200,200,0.1);
+    box-shadow: 0 5px 8px 1px rgba(0,120,195,1);
 }
 .dots {
     width: 100%;
