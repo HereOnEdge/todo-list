@@ -155,18 +155,19 @@ function myProjects() {
     bottomScreen.appendChild(title);
     bottomScreen.appendChild(projectsSection);
     for (let i = 0; i < projectArray.length; i++) {
+        let projectContainer = document.createElement("div");
+        projectContainer.classList.add("project-container");
         let project = document.createElement("li");
         project.classList.add("project")
+        projectContainer.appendChild(project)
         let editSpan = document.createElement("span");
         editSpan.classList.add("edit-span");
-        editSpan.id = i;
-        editSpan.style["grid-area"] = `${i + 1} / 2 / span 1 / span 1`
         let dots = document.createElement("span")
         dots.classList.add("dots");
         dots.textContent = "..."
         editSpan.appendChild(dots);
-        ul.appendChild(project);
-        ul.appendChild(editSpan);
+        projectContainer.appendChild(editSpan);
+        ul.appendChild(projectContainer);
     }
     detailShower();
     editDots();
@@ -192,11 +193,16 @@ let editDots = () => {
     let dotsButtons = document.querySelectorAll(".edit-span");
     for (let i = 0; i < dotsButtons.length; i++) {
         dotsButtons[i].addEventListener("click", () => {
+            if(document.querySelector(`#layout${i}`)){
+                document.querySelector(`#layout${i}`).remove();
+                return;
+            };
             if(document.querySelector(".layout-container")) {
                 document.querySelector(".layout-container").remove();
-            }
+            }; 
             let layoutContainer = document.createElement("div");
             layoutContainer.classList.add("layout-container");
+            layoutContainer.id = `layout${i}`;
             container.appendChild(layoutContainer);
             layoutContainer.style["grid-area"] = `${i + 1} / 2 / span 1 / span 1`
             let triangle = document.createElement("div");
