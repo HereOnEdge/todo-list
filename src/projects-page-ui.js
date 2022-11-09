@@ -162,6 +162,7 @@ function myProjects() {
         projectContainer.appendChild(project)
         let editSpan = document.createElement("span");
         editSpan.classList.add("edit-span");
+        editSpan.id = `eSpan${i}`;
         let dots = document.createElement("span")
         dots.classList.add("dots");
         dots.textContent = "..."
@@ -191,15 +192,20 @@ let detailShower = () => {
 let editDots = () => {
     let container = document.querySelector(".Projects-ul");
     let dotsButtons = document.querySelectorAll(".edit-span");
+    let openDots = "";                           // it contains the id number of 3dot edit button that is currently open
     for (let i = 0; i < dotsButtons.length; i++) {
         dotsButtons[i].addEventListener("click", () => {
             if(document.querySelector(`#layout${i}`)){
                 document.querySelector(`#layout${i}`).remove();
+                dotsButtons[i].classList.toggle("open");
                 return;
             };
             if(document.querySelector(".layout-container")) {
                 document.querySelector(".layout-container").remove();
+                document.querySelector(openDots).classList.toggle("open");
             }; 
+            dotsButtons[i].classList.add("open");
+            openDots = `#eSpan${i}`;
             let layoutContainer = document.createElement("div");
             layoutContainer.classList.add("layout-container");
             layoutContainer.id = `layout${i}`;

@@ -130,7 +130,7 @@ li.nav.open {
     display: grid;
     grid-template-columns: 1fr 40px;
     grid-template-rows: auto;
-    column-gap: 10px;
+    column-gap: 15px;
     position: relative;
 }
 .myProject {
@@ -145,6 +145,7 @@ li.nav.open {
 }
 .project {
     height: 40px;
+    font-size: 20px;
     font-weight: 600;
     border-width: 0 0 1px 0;
     border-style: solid;
@@ -154,16 +155,15 @@ li.nav.open {
     padding-left: 5px;
     transition: 0.3s;
 }
-.project.open {
-    box-shadow: 0 2px 5px 1px rgba(0,120,195,1);
-    font-size: 20px;
+.project.open, .edit-span.open {
+    font-size: 24px;
     color: rgba(0,120,195,1);
     background-color: rgba(200,200,200,0.1);
+    scale: 1.03;
 }
 .project:hover {
-    box-shadow: 0 5px 8px 1px rgba(0,120,195,1);
     color: rgba(0,120,195,1);
-    background-color: rgba(200,200,200,0.1);
+    background-color: rgba(200,200,200,0.1);    
 }
 .project.open .pp-spanTitle::before {
     rotate: 45deg;
@@ -181,11 +181,15 @@ li.nav.open {
     border-radius: 50%;
     transition: 0.3s;
 }
-.edit-span:hover , .edit-span:active {
-    /* box-shadow: 0 3px 5px 0 #aaaa99; */
+.edit-span.open {
+    font-size: 2.2rem;
     color: rgba(0,120,195,1);
     background-color: rgba(200,200,200,0.1);
-    box-shadow: 0 5px 8px 1px rgba(0,120,195,1);
+    scale: 1.06;
+}
+.edit-span:hover {
+    color: rgba(0,120,195,1);
+    background-color: rgba(200,200,200,0.1);
 }
 .dots {
     width: 100%;
