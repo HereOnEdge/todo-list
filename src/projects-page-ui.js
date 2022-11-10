@@ -110,26 +110,20 @@ let projectAdder = () => {
             let projectDesc = document.querySelector("#projectDesc-input");
             let projectType = document.querySelector("#projectType-input")
             let plusSign = document.querySelector(".plusSign");
-            // let typeValue = projectType.options[projectType.selectedIndex].value;
             let project = Project(projectName.value, projectDesc.value, projectType.value);
             projectArray.push(project)
             projectName.value = "";
             projectDesc.value = "";
             projectType.value = "";
             closeInfo();
-            // projectName.addEventListener("click", () => {
-            //     let newProject = document.querySelector(".newProject");
-            //     newProject.style.height = "105px";
-            // });
+            myProjects();
+            navProjects();
             setTimeout(() => {
                 projectName.remove();
                 projectDesc.remove();
                 projectType.remove();
                 plusSign.remove();
                 addProject();
-                myProjects();
-                navProjects();
-                console.log(projectArray)
             }, 600)
 
         }
