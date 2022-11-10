@@ -113,22 +113,25 @@ let projectAdder = () => {
             // let typeValue = projectType.options[projectType.selectedIndex].value;
             let project = Project(projectName.value, projectDesc.value, projectType.value);
             projectArray.push(project)
-            closeInfo();
             projectName.value = "";
             projectDesc.value = "";
             projectType.value = "";
+            closeInfo();
             // projectName.addEventListener("click", () => {
             //     let newProject = document.querySelector(".newProject");
             //     newProject.style.height = "105px";
             // });
-            projectName.remove();
-            projectDesc.remove();
-            projectType.remove();
-            plusSign.remove();
-            addProject();
-            myProjects();
-            navProjects();
-            console.log(projectArray)
+            setTimeout(() => {
+                projectName.remove();
+                projectDesc.remove();
+                projectType.remove();
+                plusSign.remove();
+                addProject();
+                myProjects();
+                navProjects();
+                console.log(projectArray)
+            }, 600)
+
         }
     })
 }
@@ -198,15 +201,15 @@ let editDots = () => {
     let openDots = "";                           // it contains the id number of 3dot edit button that is currently open
     for (let i = 0; i < dotsButtons.length; i++) {
         dotsButtons[i].addEventListener("click", () => {
-            if(document.querySelector(`#layout${i}`)){
+            if (document.querySelector(`#layout${i}`)) {
                 document.querySelector(`#layout${i}`).remove();
                 dotsButtons[i].classList.toggle("open");
                 return;
             };
-            if(document.querySelector(".layout-container")) {
+            if (document.querySelector(".layout-container")) {
                 document.querySelector(".layout-container").remove();
                 document.querySelector(openDots).classList.toggle("open");
-            }; 
+            };
             dotsButtons[i].classList.add("open");
             openDots = `#eSpan${i}`;
             let layoutContainer = document.createElement("div");
