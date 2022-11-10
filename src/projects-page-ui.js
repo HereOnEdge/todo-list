@@ -23,7 +23,7 @@ export default (function projectsDisplayer() {
         mainScreen.appendChild(bottomScreen);
         console.log("clears main screen")
         const title = document.createElement("h2");
-        title.textContent = "Title here";
+        title.textContent = "Project Manager";
         topScreen.appendChild(title);
         addProject();
         myProjects();
@@ -37,9 +37,12 @@ let addProject = () => {
     if (document.querySelector(".newProject")) {
         newProject = document.querySelector(".newProject")
     } else {
+        const containsNewProject = document.createElement("div");
+        containsNewProject.classList.add("contains-newProject")
         newProject = document.createElement("div");
         newProject.classList.add("newProject");
-        topScreen.appendChild(newProject);
+        containsNewProject.appendChild(newProject);
+        topScreen.appendChild(containsNewProject);
     }
     let projectName = document.createElement("input");
     projectName.type = "text";
@@ -89,7 +92,7 @@ let projectInfo = () => {
             option.textContent = types[i];
             projectType.appendChild(option);
         }
-        newProject.style.height = "105px";
+        newProject.style.height = "135px";
         newProject.appendChild(projectDesc);
         newProject.appendChild(projectType);
     }
@@ -133,7 +136,7 @@ let projectAdder = () => {
 // close add project collapsing window
 function closeInfo() {
     let newProject = document.querySelector(".newProject");
-    newProject.style.height = "35px"
+    newProject.style.height = "45px"
     console.log("height changed")
 }
 
@@ -148,9 +151,9 @@ function myProjects() {
     projectsSection.classList.add("myProjects")
     let ul = document.createElement("ul");
     ul.classList.add("Projects-ul");
-    let title = document.createElement("h3");
+    let title = document.createElement("span");
     title.classList.add("bottom-title");
-    title.textContent = "title here";
+    title.textContent = "Here is what's next";
     projectsSection.appendChild(ul);
     bottomScreen.appendChild(title);
     bottomScreen.appendChild(projectsSection);
