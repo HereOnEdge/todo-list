@@ -78,18 +78,18 @@ let projectInfo = () => {
         const projectType = document.createElement("select");
         projectType.name = "type";
         projectType.id = "projectType-input";
-        // create an option for each type available
-        let types = ["Work", "Workout", "Educate", "Personal", "Day To Day"];
+        // create an option for each tag available
+        let tags = ["Work", "Workout", "Educate", "Personal", "Day To Day"];
         const defaultOption = document.createElement("option");
         defaultOption.value = "";
-        defaultOption.textContent = "Select Project Type"
+        defaultOption.textContent = "Select Project's Tag"
         defaultOption.setAttribute("disabled", '');
         defaultOption.setAttribute("selected", '');
         projectType.appendChild(defaultOption);
-        for (let i = 0; i < types.length; i++) {
+        for (let i = 0; i < tags.length; i++) {
             let option = document.createElement("option");
-            option.value = types[i];
-            option.textContent = types[i];
+            option.value = tags[i];
+            option.textContent = tags[i];
             projectType.appendChild(option);
         }
         newProject.style.height = "135px";
@@ -181,6 +181,10 @@ let detailShower = () => {
         const spanTitle = document.createElement("span");
         spanTitle.classList.add("pp-spanTitle")
         project.appendChild(spanTitle);
+        const taskCounter = document.createElement("span");
+        taskCounter.classList.add("taskCounter")
+        taskCounter.textContent = `${projectArray[i].tasks.length}`;
+        project.appendChild(taskCounter);
         spanTitle.textContent = `${projectArray[i].name}`
         i++;
         spanTitle.addEventListener("click", () => {
