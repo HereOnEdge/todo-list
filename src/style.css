@@ -160,6 +160,7 @@ li.nav.open {
 }
 .project {
     height: 40px;
+    width: 100%;
     font-size: 20px;
     font-weight: 600;
     border-width: 0 0 1px 0;
@@ -169,7 +170,10 @@ li.nav.open {
     position: relative;
     padding-left: 5px;
     transition: 0.3s;
-    display: flex;
+    display: grid;
+    grid-template: "title counter" 40px/
+                    90%    25px;
+    grid-auto-flow: row;
     justify-content: space-between;
     align-items: center;
 }
@@ -178,6 +182,16 @@ li.nav.open {
     color: rgba(0,120,195,1);
     background-color: rgba(200,200,200,0.1);
     scale: 1.03;
+}
+.project.nav.open {
+    height: auto;
+
+}
+.project.open {
+    grid-template: "title counter" 40px
+                    "tasks  . "   auto/
+                    90%     25px;
+    height: 100px;
 }
 .project:hover {
     color: rgba(0,120,195,1);
@@ -213,9 +227,11 @@ li.nav.open {
 }
 
 .pp-spanTitle {
+    grid-area: title;
     display: flex;
     align-items: center;
-    height: 100%;
+    height: 41px;
+    width: 100%;
     cursor: pointer;
     flex: 1 1 80%;
 }
@@ -223,6 +239,7 @@ li.nav.open {
     text-transform: capitalize;
 }
 .taskCounter {
+    grid-area: counter;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -231,8 +248,11 @@ li.nav.open {
     aspect-ratio: 1/1;
     font-size: 16px;
     font-weight: 100;
-    background-color: #000020;
+    background-color: rgba(200,200,200,0.2);
     border-radius: 50%;
+}
+.tasks-container {
+    grid-area: tasks;
 }
 .edit-span.open {
     font-size: 2.2rem;
