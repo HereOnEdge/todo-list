@@ -191,7 +191,6 @@ li.nav.open {
     grid-template: "title counter" 40px
                     "tasks  . "   auto/
                     90%     25px;
-    height: 100px;
 }
 .project:hover {
     color: rgba(0,120,195,1);

@@ -186,17 +186,29 @@ let detailShower = () => {
         taskCounter.textContent = `${projectArray[i].tasks.length}`;
         project.appendChild(taskCounter);
         spanTitle.textContent = `${projectArray[i].name}`
-        let tasksContainer = document.createElement("ul");
-        tasksContainer.classList.add("tasks-container");
-        project.appendChild(tasksContainer);
+
         console.log(projectArray[i]);
         console.log(projectArray[i].tasks)
         let tasks = projectArray[i].tasks;
         i++;
         spanTitle.addEventListener("click", () => {
+            if (document.querySelector(".tasks-container")) {
+                document.querySelector(".tasks-container").remove();
+                console.log("container did siktir")
+                project.classList.toggle("open")
+                project.style.height = "40px";
+                return;
+            }
             project.classList.toggle("open");
-            document.querySelector(".tasks-container").style.display = "flex"
-            for (let y = 0; tasks.length; y++) {
+            project.style.height = `${40 + tasks.length * 30}px`;
+            let tasksContainer = document.createElement("ul");
+            tasksContainer.classList.add("tasks-container");
+            project.appendChild(tasksContainer);
+            if (tasks.length == 0) {
+                console.log("got no tasks")
+                return
+            }
+            for (let y = 0; y < tasks.length; y++) {
                 let domTask = document.createElement("li");
                 domTask.classList.add("task");
                 domTask.textContent = tasks[y].name;
