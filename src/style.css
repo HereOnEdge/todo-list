@@ -172,7 +172,7 @@ li.nav.open {
     transition: 0.3s;
     display: grid;
     grid-template: "title counter" 40px/
-                    90%    25px;
+                    1fr    25px;
     grid-auto-flow: row;
     justify-content: space-between;
     align-items: center;
@@ -190,7 +190,7 @@ li.nav.open {
 .project.open {
     grid-template: "title counter" 40px
                     "tasks  . "   auto/
-                    90%     25px;
+                    1fr     25px;
 }
 .project:hover {
     color: rgba(0,120,195,1);
