@@ -159,6 +159,7 @@ function myProjects() {
         projectContainer.classList.add("project-container");
         let project = document.createElement("li");
         project.classList.add("project")
+        project.id = `project-num${i}`;
         projectContainer.appendChild(project)
         let editSpan = document.createElement("span");
         editSpan.classList.add("edit-span");
@@ -192,8 +193,13 @@ let detailShower = () => {
         let tasks = projectArray[i].tasks;
         i++;
         spanTitle.addEventListener("click", () => {
-            if (document.querySelector(".tasks-container")) {
-                document.querySelector(".tasks-container").remove();
+            if (project.classList.contains("open")) {
+                let splitedProject = project.id.split('');
+                let id = splitedProject[splitedProject.length - 1];
+                console.log(id);
+                if(document.querySelector(`#tasks-container${id}`)){
+                    document.querySelector(`#tasks-container${id}`).remove();
+                }
                 console.log("container did siktir")
                 project.classList.toggle("open")
                 project.style.height = "40px";
@@ -201,13 +207,16 @@ let detailShower = () => {
             }
             project.classList.toggle("open");
             project.style.height = `${40 + tasks.length * 30}px`;
-            let tasksContainer = document.createElement("ul");
-            tasksContainer.classList.add("tasks-container");
-            project.appendChild(tasksContainer);
             if (tasks.length == 0) {
                 console.log("got no tasks")
                 return
             }
+            let tasksContainer = document.createElement("ul");
+            tasksContainer.classList.add("tasks-container");
+            let splitedProject = project.id.split('');
+            let id = splitedProject[splitedProject.length - 1];
+            tasksContainer.id = `tasks-container${id}`;
+            project.appendChild(tasksContainer);
             for (let y = 0; y < tasks.length; y++) {
                 let domTask = document.createElement("li");
                 domTask.classList.add("task");
