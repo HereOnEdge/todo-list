@@ -163,19 +163,19 @@ li.nav.open {
     width: 100%;
     font-size: 20px;
     font-weight: 600;
-    border-width: 0 0 1px 0;
+    /* border-width: 0 0 1px 0;
     border-style: solid;
-    border-color: rgba(200,200,200,0.3);
-    border-radius: 10px;
+    border-color: rgba(200,200,200,0.3);*/
+    border-radius: 10px; 
     position: relative;
-    padding-left: 5px;
     transition: 0.3s;
     display: grid;
     grid-template: "title counter" 40px/
-                    1fr    25px;
+                    1fr    40px;
     grid-auto-flow: row;
-    justify-content: space-between;
     align-items: center;
+    overflow: hidden;
+    padding-right: 2px;
 }
 .project.open, .edit-span.open {
     font-size: 24px;
@@ -219,7 +219,7 @@ li.nav.open {
     border-color: red;
     rotate: -45deg;
     position:absolute;
-    left: -10px;
+    margin-left: -15px;
     width: 5px;
     aspect-ratio: 1 / 1;
     transition: 0.3s;
@@ -231,6 +231,7 @@ li.nav.open {
     align-items: center;
     height: 41px;
     width: 100%;
+    margin-left: 20px;
     cursor: pointer;
     flex: 1 1 80%;
 }
@@ -242,7 +243,6 @@ li.nav.open {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 25px;
     height: 25px;
     aspect-ratio: 1/1;
     font-size: 16px;
@@ -262,6 +262,7 @@ li.nav.open {
 .edit-span:hover {
     color: rgba(0,120,195,1);
     background-color: rgba(200,200,200,0.1);
+    overflow: hidden;
 }
 .dots {
     width: 100%;
