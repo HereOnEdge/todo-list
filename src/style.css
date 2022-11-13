@@ -258,6 +258,34 @@ li.nav.open {
     justify-content: space-between;
     align-items: center;
     gap: min(10px , 5%);
+    width: 100%;
+}
+#newTask-input {
+    width: 50%;
+}
+.newTask-options {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+    width: 40%;
+}
+.newTask-options div:hover {
+    background-color: rgba(200,200,200,0.1);
+    border-radius: 5px;
+    scale: 1.5;
+}
+.important-btn {
+    display: flex;
+    align-items: center;
+    width: 22px;
+    height: 22px;
+    color: red;
+}
+.important-img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
 }
 .datepicker-container {
     display: inline-block;

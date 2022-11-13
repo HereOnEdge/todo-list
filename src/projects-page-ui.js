@@ -6,6 +6,7 @@ import editImgUrl from "./img/edit-icon.png";
 import removeImgUrl from "./img/remove-icon.png";
 import infoImgUrl from "./img/info-icon.png";
 import calendarImgUrl from "./img/calendar.png";
+import importantImgUrl from "./img/important.png";
 
 // display projects on main screen
 export default (function projectsDisplayer() {
@@ -253,10 +254,22 @@ let detailShower = () => {
             let newTaskTime = document.createElement("input");
             newTaskTime.type = "date";
             newTaskTime.id = "newTaskTime-input";
+            let options = document.createElement("div");
+            options.classList.add("newTask-options");
             dateContainer.appendChild(dateIcon);
             dateContainer.appendChild(newTaskTime);
+            options.appendChild(dateContainer);
             newTaskContainer.appendChild(newTask);
-            newTaskContainer.appendChild(dateContainer);
+            newTaskContainer.appendChild(options);
+            // make a button for setting a task as important or not
+            let important_btn = document.createElement("div");
+            important_btn.classList.add("important-btn");
+            let important_img = document.createElement("img");
+            important_img.classList.add("important-img");
+            important_img.src = importantImgUrl;
+            important_img.alt = "important icon";
+            important_btn.appendChild(important_img);
+            options.appendChild(important_btn);
             tasksContainer.appendChild(newTaskContainer);
             for (let y = 0; y < tasks.length; y++) {
                 let domTask = document.createElement("li");
