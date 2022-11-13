@@ -47,9 +47,14 @@ let addProject = () => {
     let projectName = document.createElement("input");
     projectName.type = "text";
     projectName.placeholder = "Add Project";
-    projectName.id = "projectName-input"
+    projectName.id = "projectName-input";
     newProject.appendChild(projectName);
     addSign();
+    projectName.addEventListener("keypress", (event)=> {
+        if(event.key === "Enter"){
+            document.querySelector(".plusSign").click();
+        }
+    })
     projectName.addEventListener("click", projectInfo)
 
 }
@@ -78,6 +83,19 @@ let projectInfo = () => {
         const projectType = document.createElement("select");
         projectType.name = "type";
         projectType.id = "projectType-input";
+        // make enter key save the new project on description input
+        projectDesc.addEventListener("keypress",(event)=> {
+            if(event.keyCode === 13){
+                document.querySelector(".plusSign").click();
+            }
+        });
+        // make enter button work on tag input too
+        projectType.addEventListener("keypress", (event) => {
+            if(event.key === "Enter"){
+                event.preventDefault();
+                document.querySelector(".plusSign").click();
+            }
+        })
         // create an option for each tag available
         let tags = ["Work", "Workout", "Educate", "Personal", "Day To Day"];
         const defaultOption = document.createElement("option");
@@ -300,3 +318,14 @@ let editDots = () => {
 let disOptions = () => {
 
 }
+
+// make a function to get and store new taaks
+
+// make a function to display how many days you have
+// to complete each task in front of it
+// make day counter smart
+
+// make a function to sort tasks based on important tag
+// also make a mark for important tag
+
+// make a radio input to mark a task as complete
