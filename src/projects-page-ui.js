@@ -5,6 +5,7 @@ import doneImgUrl from "./img/checklist.png";
 import editImgUrl from "./img/edit-icon.png";
 import removeImgUrl from "./img/remove-icon.png";
 import infoImgUrl from "./img/info-icon.png";
+import calendarImgUrl from "./img/calendar.png";
 
 // display projects on main screen
 export default (function projectsDisplayer() {
@@ -224,7 +225,7 @@ let detailShower = () => {
                 return;
             }
             project.classList.toggle("open");
-            project.style.height = `${40 + tasks.length * 30}px`;
+            project.style.height = `${65 + tasks.length * 30}px`;
             if (tasks.length == 0) {
                 console.log("got no tasks")
                 return
@@ -235,6 +236,28 @@ let detailShower = () => {
             let id = splitedProject[splitedProject.length - 1];
             tasksContainer.id = `tasks-container${id}`;
             project.appendChild(tasksContainer);
+            // set a input to add new tasks to each project
+
+            let newTaskContainer = document.createElement("div");
+            newTaskContainer.classList.add("new-task-container");
+            let newTask = document.createElement("input");
+            newTask.type = "text";
+            newTask.placeholder = "Add Task";
+            newTask.id = "newTask-input";
+            let dateContainer = document.createElement("div");
+            dateContainer.classList.add("datepicker-container");
+            let dateIcon = document.createElement("img");
+            dateIcon.classList.add("datepicker-icon");
+            dateIcon.src = calendarImgUrl;
+            dateIcon.alt = "calendar icon";
+            let newTaskTime = document.createElement("input");
+            newTaskTime.type = "date";
+            newTaskTime.id = "newTaskTime-input";
+            dateContainer.appendChild(dateIcon);
+            dateContainer.appendChild(newTaskTime);
+            newTaskContainer.appendChild(newTask);
+            newTaskContainer.appendChild(dateContainer);
+            tasksContainer.appendChild(newTaskContainer);
             for (let y = 0; y < tasks.length; y++) {
                 let domTask = document.createElement("li");
                 domTask.classList.add("task");
