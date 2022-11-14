@@ -249,6 +249,7 @@ li.nav.open {
     font-weight: 100;
     background-color: rgba(200,200,200,0.2);
     border-radius: 50%;
+    cursor: default;
 }
 .tasks-container {
     grid-area: tasks;
@@ -443,6 +444,40 @@ input[type=text]:focus {
     overflow: hidden;
     font-size: 16px;
 }
+.newProject-lastColumn{
+    grid-area: 3 / 2 / 4 / 3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+.closeBtn-container {
+    margin-right: 19px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid red;
+    border-radius: 50%;
+}
+.closeBtn-container:active {
+    background-color: red;
+}
+.arrow {
+    width: 30px;
+    /* clip-path: polygon(10px at 10px 10px); */
+    height: 30px;
+    clip-path: polygon(
+        50% 3px,
+        20% 15px,
+        35% 15px,
+        35% 27px,
+        65% 27px,
+        65% 15px,
+        80% 15px,
+        50% 3px 
+    ); 
+    background-color: rgba(0,120,195,1);
+}
 .plusSign{
     grid-area: 1 / 1 / 2 /2;
     width: 35px;
@@ -479,7 +514,6 @@ input[type=text]:focus {
 }
 #projectType-input {
     font-size: inherit;
-    grid-area: 3 / 2 / 4 / 3;
     background-color: #001740;
     color: #aaaa99;
     border: none;

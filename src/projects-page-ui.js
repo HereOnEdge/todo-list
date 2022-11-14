@@ -82,22 +82,35 @@ let projectInfo = () => {
         projectDesc.type = "text"
         projectDesc.placeholder = "Add Description (Optional)";
         projectDesc.id = "projectDesc-input";
+        // make a div to store projectType and close button in it
+        let lastColumn = document.createElement("div");
+        lastColumn.classList.add("newProject-lastColumn"); 
+        // make a select button for selecting project type
         const projectType = document.createElement("select");
         projectType.name = "type";
         projectType.id = "projectType-input";
-        // make enter key save the new project on description input
-        projectDesc.addEventListener("keypress",(event)=> {
-            if(event.keyCode === 13){
-                document.querySelector(".plusSign").click();
-            }
+        lastColumn.appendChild(projectType);
+
+        // make a button for closing the collapsing window
+        let btnContainer = document.createElement("div");
+        btnContainer.classList.add("closeBtn-container");
+        let btn = document.createElement("div");
+        btn.classList.add("arrow");
+        btnContainer.appendChild(btn);
+        lastColumn.appendChild(btnContainer);
+        // make arrow btn functional
+        let plusSign = document.querySelector(".plusSign");
+        btnContainer.addEventListener("click", () => {
+            closeInfo();
+            setTimeout(() => {
+                projectname.remove();
+                projectDesc.remove();
+                lastColumn.remove();
+                plusSign.remove();
+                addProject();
+            }, 600)
         });
-        // make enter button work on tag input too
-        projectType.addEventListener("keypress", (event) => {
-            if(event.key === "Enter"){
-                event.preventDefault();
-                document.querySelector(".plusSign").click();
-            }
-        })
+
         // create an option for each tag available
         let tags = ["Work", "Workout", "Educate", "Personal", "Day To Day"];
         const defaultOption = document.createElement("option");
@@ -114,7 +127,20 @@ let projectInfo = () => {
         }
         newProject.style.height = "135px";
         newProject.appendChild(projectDesc);
-        newProject.appendChild(projectType);
+        newProject.appendChild(lastColumn);
+        // make enter key save the new project on description input
+        projectDesc.addEventListener("keypress",(event)=> {
+            if(event.keyCode === 13){
+                document.querySelector(".plusSign").click();
+            }
+        });
+        // make enter button work on tag input too
+        projectType.addEventListener("keypress", (event) => {
+            if(event.key === "Enter"){
+                event.preventDefault();
+                document.querySelector(".plusSign").click();
+            }
+        })
     }
 }
 // when plus button is clicked check for required information before adding a new project 
@@ -128,7 +154,8 @@ let projectAdder = () => {
             projectInfo();
         } else {
             let projectDesc = document.querySelector("#projectDesc-input");
-            let projectType = document.querySelector("#projectType-input")
+            let projectType = document.querySelector("#projectType-input");
+            let lastColumn = document.querySelector(".newProject-lastColumn");
             let plusSign = document.querySelector(".plusSign");
             let project = Project(projectName.value, projectDesc.value, projectType.value);
             projectArray.push(project)
@@ -141,7 +168,7 @@ let projectAdder = () => {
             setTimeout(() => {
                 projectName.remove();
                 projectDesc.remove();
-                projectType.remove();
+                lastColumn.remove();
                 plusSign.remove();
                 addProject();
             }, 600)
@@ -149,12 +176,10 @@ let projectAdder = () => {
         }
     })
 }
-
 // close add project collapsing window
 function closeInfo() {
     let newProject = document.querySelector(".newProject");
     newProject.style.height = "45px"
-    console.log("height changed")
 }
 
 // show projects that are already in progress
@@ -196,6 +221,11 @@ function myProjects() {
         spanTitle.id = `spanTitle${i}`;
         project.appendChild(spanTitle);
         spanTitle.textContent = `${projectArray[i].name}`;
+        // show how many tasks each project have
+        const taskCounter = document.createElement("span");
+        taskCounter.classList.add("taskCounter")
+        taskCounter.textContent = `${projectArray[i].tasks.length}`;
+        project.appendChild(taskCounter);
     }
     detailShower();
     editDots();
@@ -206,10 +236,6 @@ let detailShower = () => {
     let i = 0;
     for (let project of projects) {
         let spanTitle = document.querySelector(`#spanTitle${i}`);
-        const taskCounter = document.createElement("span");
-        taskCounter.classList.add("taskCounter")
-        taskCounter.textContent = `${projectArray[i].tasks.length}`;
-        project.appendChild(taskCounter);
         let tasks = projectArray[i].tasks;
         i++;
         spanTitle.addEventListener("click", () => {
