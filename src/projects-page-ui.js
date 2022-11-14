@@ -190,6 +190,12 @@ function myProjects() {
         editSpan.appendChild(dots);
         projectContainer.appendChild(editSpan);
         ul.appendChild(projectContainer);
+        // set each project a name 
+        const spanTitle = document.createElement("span");
+        spanTitle.classList.add("pp-spanTitle");
+        spanTitle.id = `spanTitle${i}`;
+        project.appendChild(spanTitle);
+        spanTitle.textContent = `${projectArray[i].name}`;
     }
     detailShower();
     editDots();
@@ -199,38 +205,26 @@ let detailShower = () => {
     let projects = document.querySelectorAll(".project");
     let i = 0;
     for (let project of projects) {
-        const spanTitle = document.createElement("span");
-        spanTitle.classList.add("pp-spanTitle")
-        project.appendChild(spanTitle);
+        let spanTitle = document.querySelector(`#spanTitle${i}`);
         const taskCounter = document.createElement("span");
         taskCounter.classList.add("taskCounter")
         taskCounter.textContent = `${projectArray[i].tasks.length}`;
         project.appendChild(taskCounter);
-        spanTitle.textContent = `${projectArray[i].name}`
-
-        console.log(projectArray[i]);
-        console.log(projectArray[i].tasks)
         let tasks = projectArray[i].tasks;
         i++;
         spanTitle.addEventListener("click", () => {
             if (project.classList.contains("open")) {
                 let splitedProject = project.id.split('');
                 let id = splitedProject[splitedProject.length - 1];
-                console.log(id);
                 if(document.querySelector(`#tasks-container${id}`)){
                     document.querySelector(`#tasks-container${id}`).remove();
                 }
-                console.log("container did siktir")
                 project.classList.toggle("open")
                 project.style.height = "40px";
                 return;
             }
             project.classList.toggle("open");
-            project.style.height = `${65 + tasks.length * 30}px`;
-            if (tasks.length == 0) {
-                console.log("got no tasks")
-                return
-            }
+            project.style.height = `${100 + tasks.length * 30}px`;
             let tasksContainer = document.createElement("ul");
             tasksContainer.classList.add("tasks-container");
             let splitedProject = project.id.split('');
@@ -271,6 +265,13 @@ let detailShower = () => {
             important_btn.appendChild(important_img);
             options.appendChild(important_btn);
             tasksContainer.appendChild(newTaskContainer);
+
+            // if project doesnt have any tasks , quit
+            if (tasks.length == 0) {
+                return
+            }
+
+            // add project's tasks to it
             for (let y = 0; y < tasks.length; y++) {
                 let domTask = document.createElement("li");
                 domTask.classList.add("task");
