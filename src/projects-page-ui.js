@@ -51,8 +51,8 @@ let addProject = () => {
     projectName.id = "projectName-input";
     newProject.appendChild(projectName);
     addSign();
-    projectName.addEventListener("keypress", (event)=> {
-        if(event.key === "Enter"){
+    projectName.addEventListener("keypress", (event) => {
+        if (event.key === "Enter") {
             document.querySelector(".plusSign").click();
         }
     })
@@ -83,7 +83,7 @@ let projectInfo = () => {
         projectDesc.id = "projectDesc-input";
         // make a div to store projectType and close button in it
         let lastColumn = document.createElement("div");
-        lastColumn.classList.add("newProject-lastColumn"); 
+        lastColumn.classList.add("newProject-lastColumn");
         // make a select button for selecting project type
         const projectType = document.createElement("select");
         projectType.name = "type";
@@ -128,14 +128,14 @@ let projectInfo = () => {
         newProject.appendChild(projectDesc);
         newProject.appendChild(lastColumn);
         // make enter key save the new project on description input
-        projectDesc.addEventListener("keypress",(event)=> {
-            if(event.keyCode === 13){
+        projectDesc.addEventListener("keypress", (event) => {
+            if (event.keyCode === 13) {
                 document.querySelector(".plusSign").click();
             }
         });
         // make enter button work on tag input too
         projectType.addEventListener("keypress", (event) => {
-            if(event.key === "Enter"){
+            if (event.key === "Enter") {
                 event.preventDefault();
                 document.querySelector(".plusSign").click();
             }
@@ -156,7 +156,7 @@ let projectAdder = () => {
             let projectType = document.querySelector("#projectType-input");
             let lastColumn = document.querySelector(".newProject-lastColumn");
             let plusSign = document.querySelector(".plusSign");
-            let project = Project(projectName.value, projectDesc.value, projectType.value);
+            let project = Project(projectName.value, projectArray.length, projectDesc.value, projectType.value);
             projectArray.push(project)
             projectName.value = "";
             projectDesc.value = "";
@@ -223,6 +223,7 @@ function myProjects() {
         // show how many tasks each project have
         const taskCounter = document.createElement("span");
         taskCounter.classList.add("taskCounter")
+        taskCounter.id = `taskCounter${projectArray[i].id}`
         taskCounter.textContent = `${projectArray[i].tasks.length}`;
         project.appendChild(taskCounter);
     }
@@ -235,13 +236,14 @@ let detailShower = () => {
     let i = 0;
     for (let project of projects) {
         let spanTitle = document.querySelector(`#spanTitle${i}`);
-        let tasks = projectArray[i].tasks;
+        let projectObject = projectArray[i];
+        let tasks = projectObject.tasks;
         i++;
         spanTitle.addEventListener("click", () => {
             if (project.classList.contains("open")) {
                 let splitedProject = project.id.split('');
                 let id = splitedProject[splitedProject.length - 1];
-                if(document.querySelector(`#tasks-container${id}`)){
+                if (document.querySelector(`#tasks-container${id}`)) {
                     document.querySelector(`#tasks-container${id}`).remove();
                 }
                 project.classList.toggle("open")
@@ -260,10 +262,17 @@ let detailShower = () => {
 
             let newTaskContainer = document.createElement("div");
             newTaskContainer.classList.add("new-task-container");
+            let input_btnContainer = document.createElement("div");
+            input_btnContainer.classList.add("input-btn-container");
+            let btn = document.createElement("div");
+            btn.classList.add("taskAdder");
+            btn.textContent = "+";
+            input_btnContainer.appendChild(btn);
             let newTask = document.createElement("input");
             newTask.type = "text";
             newTask.placeholder = "Add Task";
             newTask.id = "newTask-input";
+            input_btnContainer.appendChild(newTask);
             let dateContainer = document.createElement("div");
             dateContainer.classList.add("datepicker-container");
             let dateIcon = document.createElement("img");
@@ -278,7 +287,7 @@ let detailShower = () => {
             dateContainer.appendChild(dateIcon);
             dateContainer.appendChild(newTaskTime);
             options.appendChild(dateContainer);
-            newTaskContainer.appendChild(newTask);
+            newTaskContainer.appendChild(input_btnContainer);
             newTaskContainer.appendChild(options);
             // make a button for setting a task as important or not
             let important_btn = document.createElement("div");
@@ -297,12 +306,37 @@ let detailShower = () => {
             }
 
             // add project's tasks to it
-            for (let y = 0; y < tasks.length; y++) {
-                let domTask = document.createElement("li");
-                domTask.classList.add("task");
-                domTask.textContent = tasks[y].name;
-                tasksContainer.appendChild(domTask);
-            }
+            function displayTasks() {
+                for (let y = 0; y < tasks.length; y++) {
+                    let domTask = document.createElement("li");
+                    domTask.classList.add("task");
+                    domTask.id = `task${projectObject.id}`
+                    domTask.textContent = tasks[y].name;
+                    tasksContainer.appendChild(domTask);
+                }
+            };
+            displayTasks();
+            // set a listener on task adder button 
+            btn.addEventListener("click", () => {
+                if (newTask.value === "") {
+                    newTask.focus();
+                    return;
+                };
+                let taskName = newTask.value;
+                let taskDate = newTaskTime.value;
+                let task = projectObject.addTask(taskName, taskDate, true);
+                projectObject.tasks.push(task);
+                newTask.value = '';
+                newTaskTime.value = '';
+                let oldTasks = document.querySelectorAll(`#task${projectObject.id}`);
+                for( let oldTask of oldTasks){
+                    oldTask.remove();
+                }
+                displayTasks();
+                project.style.height = `${100 + tasks.length * 30}px`;
+                let taskCounter = document.querySelector(`#taskCounter${projectObject.id}`);
+                taskCounter.textContent = tasks.length;
+            })
         })
     }
 }
