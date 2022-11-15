@@ -1,17 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+:root {
+    --primary-color : #a1e9ff;
+    --secondary-color: #121212;
+    --third-color: rgba(20,20,20,0.3);
+    --forth-color: #eeeeee;
+    --button-color: red;
+    --open-arrow-color: #a1e9ff;
+    --primary-text-color: #121212;
+    --secondary-text-color: #eeeeee;
+    --box-shadow-color: #121212;
+    font-family: 'Roboto', sans-serif;
+}
 body {
-    background-color: #001740;
-    color: #aaaa99;
+    background-color: var(--primary-color);
+    color: var(--primary-text-color);
     margin: 0;
 }
 header {
-    height: 10vh;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    height: 20vh;
+    width: 100%;
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: 3px solid #aaaa99;
+    border-bottom: 3px solid var(--secondary-color);
+    border-radius: 0 20px 0 0;
 }
 main {
+    background-color: var(--forth-color);
+    color: var(--primary-text-color);
     height: 95vh;
     display: grid;
     grid-template-columns: 1fr 4fr ;
@@ -40,8 +59,8 @@ main {
     width: clamp( 300px,90% , 650px);
     display: flex;
     justify-content: flex-start;
-    border-radius: 10px;
-    box-shadow: 0 5px 8px 5px #000020;
+    border-radius: 20px;
+    box-shadow: 0 5px 8px 5px var(--box-shadow-color);
     
 }
 .bottom-screen {
@@ -56,7 +75,7 @@ main {
     flex-flow: column;
     justify-content: center;
     align-items: flex-start;
-    border: 1px solid #aaaa99;
+    border: 1px solid var(--primary-text-color);
 }
 .nav {
     height: 19px;
@@ -64,11 +83,16 @@ main {
     transition: 0.6s ;
 }
 .navbar {
-    height: 100%;
+    align-self: center;
+    background-color: var(--secondary-color);
+    color: var(--secondary-text-color);
+    height: 99%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border: 1px solid #aaaa99;
+    border: 3px solid var(--secondary-color);
+    border-radius: 0 23px 0 0;
 }
 .nav-ul {
     margin: 0;
@@ -84,7 +108,7 @@ main {
     list-style: none;
 }
 .nav:active {
-    color: #aaaa99;
+    color: var(--primary-color);
 }
 #title-span {
     cursor: pointer;
@@ -93,11 +117,11 @@ main {
 }
 #title-span:hover {
     text-decoration: underline;
-    color: aqua;
+    color: var(--open-arrow-color);
 }
 #title-span::before {
     content: "";
-    border-color: red;
+    border-color: var(--button-color);
     border-width: 0 1px 1px 0;
     border-style: solid;
     rotate: -45deg;
@@ -110,19 +134,21 @@ main {
 }
 .nav.open #title-span::before {
     rotate: 45deg;
-    border-color: aqua;
+    border-color: var(--open-arrow-color);
 }
 li.nav.open {
     padding-top: 10px;
     font-size: 22px;
 }
 .myProjects {
+    background-color: var(--primary-color);
+    color: var(--primary-text-color);
     width: clamp( 300px,90% , 650px);
     /* min-height: 20vh; */
     padding: 15px 0;
     margin-bottom: 5vh;
     border-radius: 20px;
-    box-shadow: 0 5px 8px 5px #000020;
+    box-shadow: 0 5px 8px 5px var(--box-shadow-color);
 }
 .Projects-ul {
     padding-left: 38px;
@@ -155,7 +181,7 @@ li.nav.open {
     list-style: none;
 }
 .myProject li:hover {
-    background-color: #000020;
+    background-color: var(--box-shadow-color);
     text-decoration: none;
 }
 .project {
@@ -179,8 +205,8 @@ li.nav.open {
 }
 .project.open, .edit-span.open {
     font-size: 28px;
-    color: rgba(0,120,195,1);
-    background-color: rgba(200,200,200,0.1);
+    color: var(--secondary-color);
+    background-color: var(--third-color);
     scale: 1.03;
 }
 .project.nav.open {
@@ -193,13 +219,13 @@ li.nav.open {
                     1fr     25px;
 }
 .project:hover {
-    color: rgba(0,120,195,1);
-    background-color: rgba(200,200,200,0.1);    
+    color: var(--secondary-color);
+    background-color: var(--third-color);    
 }
 .project.open .pp-spanTitle::before {
     rotate: 45deg;
     transition: 0.3s;
-    border-color: aqua;
+    border-color: var(--open-arrow-color);
 }
 .edit-span {
     font-size: 2rem;
@@ -216,7 +242,7 @@ li.nav.open {
     content: '';
     border-style: solid;
     border-width: 0 1px 1px 0;
-    border-color: red;
+    border-color: var(--button-color);
     rotate: -45deg;
     position:absolute;
     margin-left: -15px;
@@ -247,7 +273,7 @@ li.nav.open {
     aspect-ratio: 1/1;
     font-size: 16px;
     font-weight: 100;
-    background-color: rgba(200,200,200,0.2);
+    background-color: var(--third-color);
     border-radius: 50%;
     cursor: default;
 }
@@ -270,10 +296,10 @@ li.nav.open {
     height: 50%;
     border-radius: 8px;
     padding-left: 5px;
-    color: rgba(0,120,195,1);
+    color: var(--secondary-color);
 }
 #newTask-input::placeholder {
-    color: #aaaa99;    
+    color: var(--primary-text-color);    
     opacity: 0.7;
 }
 .newTask-options {
@@ -286,15 +312,15 @@ li.nav.open {
     width: 40%;
 }
 .newTask-options div:hover {
-    background-color: rgba(200,200,200,0.1);
+    background-color: var(--third-color);
     border-radius: 5px;
     scale: 1.5;
 }
 .task {
     display: flex;
     justify-content: center;
-    color: #aaaa99;
-    background-color: #001740;
+    color: var(--primary-text-color);
+    background-color: var(--primary-color);
     border-radius: 8px;
     margin-left: auto;
     margin-right: auto;
@@ -309,7 +335,7 @@ li.nav.open {
     align-items: center;
     width: 22px;
     height: 22px;
-    color: red;
+    color: var(--button-color);
 }
 .important-img {
     width: 100%;
@@ -340,13 +366,13 @@ li.nav.open {
 }
 .edit-span.open {
     font-size: 2.2rem;
-    color: rgba(0,120,195,1);
-    background-color: rgba(200,200,200,0.1);
+    color: var(--secondary-color);
+    background-color:var(--third-color);
     scale: 1.06;
 }
 .edit-span:hover {
-    color: rgba(0,120,195,1);
-    background-color: rgba(200,200,200,0.1);
+    color: var(--secondary-color);
+    background-color:var(--third-color);
     overflow: hidden;
 }
 .dots {
@@ -373,7 +399,7 @@ li.nav.open {
     position: relative;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-bottom: 5px solid rgba(0,120,195,1);
+    border-bottom: 5px solid var(--forth-color);
     rotate: -90deg;
     margin-right: -3px;
     width: 0;
@@ -383,7 +409,7 @@ li.nav.open {
 .edit-mainBox {
     position: relative;
     width: 100%;
-    background-color: rgba(0,120,195,1);
+    background-color: var(--forth-color);
     border-radius: 10px;
     flex: 10 1 35px;
     display: flex;
@@ -409,6 +435,7 @@ li.nav.open {
 h2 {
     font-size: 35px;
     margin-top: 0;
+    text-align: center;
 }
 .bottom-title {
     font-size: 28px;
@@ -422,8 +449,8 @@ h2 {
     align-items: center;
 }
 input[type=text] {
-    background-color: #001740;
-    color:#aaaa99;
+    background-color: var(--primary-color);
+    color:var(--primary-text-color);
     border: none;
 }
 input[type=text]:focus {
@@ -431,8 +458,10 @@ input[type=text]:focus {
     outline: none;
 }
 .newProject {
+    background-color: var(--primary-color);
     display: grid;
     width: 100%;
+    padding-left: 5px;
     grid-template-columns: 35px 1fr ;
     grid-template-rows: 45px;
     grid-auto-rows: 45px;
@@ -443,6 +472,7 @@ input[type=text]:focus {
     transition: 0.6s;
     overflow: hidden;
     font-size: 16px;
+    border-radius: 20px;
 }
 .newProject-lastColumn{
     grid-area: 3 / 2 / 4 / 3;
@@ -456,11 +486,11 @@ input[type=text]:focus {
     margin-right: 19px;
     width: 30px;
     height: 30px;
-    border: 1px solid red;
+    border: 1px solid var(--button-color);
     border-radius: 50%;
 }
 .closeBtn-container:active {
-    background-color: red;
+    background-color: var(--button-color);
 }
 .arrow {
     width: 30px;
@@ -476,7 +506,7 @@ input[type=text]:focus {
         80% 15px,
         50% 3px 
     ); 
-    background-color: rgba(0,120,195,1);
+    background-color: var(--secondary-color);
 }
 .plusSign{
     grid-area: 1 / 1 / 2 /2;
@@ -486,10 +516,12 @@ input[type=text]:focus {
     align-items: center;
     text-align: center;
     aspect-ratio: 1/1;
-    color: red;
+    color: var(--button-color);
     cursor: pointer;
     font-size: 28px;
     transition: 0.2s;
+    border-radius: 50%;
+    background-color: var(--third-color);
 }
 #projectName-input {
     font-size: inherit;
@@ -504,8 +536,8 @@ input[type=text]:focus {
 #projectDate-input {
     font-size: inherit;
     grid-area: 3 / 2 / 4 / 3;
-    background-color: #001740;
-    color: #aaaa99;
+    background-color: var(--primary-color);
+    color: var(--primary-text-color);
     border: none;
     width: min(200px , 100%);
 }
@@ -514,8 +546,8 @@ input[type=text]:focus {
 }
 #projectType-input {
     font-size: inherit;
-    background-color: #001740;
-    color: #aaaa99;
+    background-color: var(--primary-color);
+    color: var(--primary-text-color);
     border: none;
     width: min(200px , 100%);
 }
@@ -523,12 +555,14 @@ input[type=text]:focus {
     outline: none;
 }
 .plusSign:hover {
-    color: aqua;
+    color: var(--open-arrow-color);
 }
 .plusSign:active {
     transform: scale(0.5);
 }
 footer{
+    background-color: var(--secondary-color);
+    color: var(--secondary-text-color);
     text-align: center;
     display: flex;
     justify-content: center;

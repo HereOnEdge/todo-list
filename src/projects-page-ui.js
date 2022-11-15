@@ -23,7 +23,6 @@ export default (function projectsDisplayer() {
         bottomScreen.classList.add("bottom-screen");
         mainScreen.appendChild(topScreen);
         mainScreen.appendChild(bottomScreen);
-        console.log("clears main screen")
         const title = document.createElement("h2");
         title.textContent = "Project Manager";
         topScreen.appendChild(title);
