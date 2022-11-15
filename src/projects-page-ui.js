@@ -299,7 +299,29 @@ let detailShower = () => {
             important_btn.appendChild(important_img);
             options.appendChild(important_btn);
             tasksContainer.appendChild(newTaskContainer);
-
+            
+            // set a listener on task adder button 
+            btn.addEventListener("click", () => {
+                if (newTask.value === "") {
+                    newTask.focus();
+                    return;
+                };
+                console.log("i clicked");
+                let taskName = newTask.value;
+                let taskDate = newTaskTime.value;
+                let task = projectObject.addTask(taskName, taskDate, true);
+                projectObject.tasks.push(task);
+                newTask.value = '';
+                newTaskTime.value = '';
+                let oldTasks = document.querySelectorAll(`#task${projectObject.id}`);
+                for( let oldTask of oldTasks){
+                    oldTask.remove();
+                }
+                displayTasks();
+                project.style.height = `${100 + tasks.length * 30}px`;
+                let taskCounter = document.querySelector(`#taskCounter${projectObject.id}`);
+                taskCounter.textContent = tasks.length;
+            })
             // if project doesnt have any tasks , quit
             if (tasks.length == 0) {
                 return
@@ -316,27 +338,6 @@ let detailShower = () => {
                 }
             };
             displayTasks();
-            // set a listener on task adder button 
-            btn.addEventListener("click", () => {
-                if (newTask.value === "") {
-                    newTask.focus();
-                    return;
-                };
-                let taskName = newTask.value;
-                let taskDate = newTaskTime.value;
-                let task = projectObject.addTask(taskName, taskDate, true);
-                projectObject.tasks.push(task);
-                newTask.value = '';
-                newTaskTime.value = '';
-                let oldTasks = document.querySelectorAll(`#task${projectObject.id}`);
-                for( let oldTask of oldTasks){
-                    oldTask.remove();
-                }
-                displayTasks();
-                project.style.height = `${100 + tasks.length * 30}px`;
-                let taskCounter = document.querySelector(`#taskCounter${projectObject.id}`);
-                taskCounter.textContent = tasks.length;
-            })
         })
     }
 }
