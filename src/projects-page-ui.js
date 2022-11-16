@@ -152,6 +152,7 @@ let projectAdder = () => {
             projectName.focus();
             projectInfo();
         } else {
+            projectInfo();
             let projectDesc = document.querySelector("#projectDesc-input");
             let projectType = document.querySelector("#projectType-input");
             let lastColumn = document.querySelector(".newProject-lastColumn");
@@ -307,7 +308,6 @@ let detailShower = () => {
                         newTask.focus();
                         return;
                     };
-                    console.log("i clicked");
                     let taskName = newTask.value;
                     let taskDate = newTaskTime.value;
                     let task = projectObject.addTask(taskName, taskDate, true);
