@@ -285,30 +285,30 @@ li.nav.open {
 }
 .new-task-container {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     gap: min(10px , 5%);
     width: 100%;
     height: 50px;
+    margin-left: -10px;
 }
 .input-btn-container {
     width: 50%;
     height: 100%;
     display: flex;
     align-items: center;
-    
+    gap: max(7px, 1vh);
 }
 .taskAdder {
-    width: 20%;
+    width: 10%;
     height: 100%;
     color: var(--button-color);
     cursor: pointer;
     display: flex;
-    justify-content: center;
     align-items: center;
+    font-weight: 200;
 }
 #newTask-input {
-    width: 80%;
+    width: 90%;
     height: 50%;
     border-radius: 8px;
     padding-left: 5px;
@@ -323,7 +323,6 @@ li.nav.open {
     flex-direction: row-reverse;
     align-items: center;
     justify-content: flex-start;
-    padding-right: 10px;
     gap: 20px;
     width: 40%;
 }
@@ -334,16 +333,17 @@ li.nav.open {
 }
 .task {
     display: flex;
-    justify-content: center;
+    justify-content: start;
+    align-items: center;
     color: var(--primary-text-color);
     background-color: var(--primary-color);
     border-radius: 8px;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 3px;
+    margin-bottom: 10px;
     padding-left: 5px;
-    width: 90%;
-    height: 27px;
+    width: 80%;
+    height: 40px;
     font-size: 20px;
 }
 .important-btn {

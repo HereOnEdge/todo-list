@@ -252,7 +252,7 @@ let detailShower = () => {
                 return;
             }
             project.classList.toggle("open");
-            project.style.height = `${100 + tasks.length * 30}px`;
+            project.style.height = `${100 + tasks.length * 50}px`;
             let tasksContainer = document.createElement("ul");
             tasksContainer.classList.add("tasks-container");
             let splitedProject = project.id.split('');
@@ -291,14 +291,16 @@ let detailShower = () => {
             newTaskContainer.appendChild(input_btnContainer);
             newTaskContainer.appendChild(options);
             // make a button for setting a task as important or not
-            let important_btn = document.createElement("div");
-            important_btn.classList.add("important-btn");
-            let important_img = document.createElement("img");
-            important_img.classList.add("important-img");
-            important_img.src = importantImgUrl;
-            important_img.alt = "important icon";
-            important_btn.appendChild(important_img);
-            options.appendChild(important_btn);
+
+            // let important_btn = document.createElement("div");
+            // important_btn.classList.add("important-btn");
+            // let important_img = document.createElement("img");
+            // important_img.classList.add("important-img");
+            // important_img.src = importantImgUrl;
+            // important_img.alt = "important icon";
+            // important_btn.appendChild(important_img);
+            // options.appendChild(important_btn);
+
             tasksContainer.appendChild(newTaskContainer);
 
             // set a listener on task adder button 
@@ -319,7 +321,7 @@ let detailShower = () => {
                         oldTask.remove();
                     }
                     displayTasks();
-                    project.style.height = `${100 + tasks.length * 30}px`;
+                    project.style.height = `${100 + tasks.length * 50}px`;
                     let taskCounter = document.querySelector(`#taskCounter${projectObject.id}`);
                     taskCounter.textContent = tasks.length;
                 });
