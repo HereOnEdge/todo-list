@@ -284,14 +284,89 @@ li.nav.open {
     list-style: none;
     padding-left: 30px;
     border-radius: 10px;
+    perspective: 1000px;
+}
+.flipping-card {
+    width: 100%;
+    height: 50px;
+    position: relative;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    margin-bottom: 5px;
+}
+.flipping-card.flipped {
+    transform: rotateX(180deg);
 }
 .new-task-container {
     display: flex;
     align-items: center;
     gap: min(10px , 5%);
-    width: 100%;
-    height: 50px;
     margin-left: -10px;
+}
+.newTask-backSide, .new-task-container {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    backface-visibility: hidden;
+}
+.newTask-backSide {
+    transform: rotateX(180deg);
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items:center;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border-radius: 100px;
+}
+.importance-question {
+    font-size: 20px;
+}
+.importance-buttons {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+.yes-button, .no-button {
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 50%;
+    box-sizing: border-box;
+}
+.yes-button {
+    border: 1px solid var(--primary-color);
+}
+.no-button {
+    border: 1px solid var(--button-color);
+}
+.yes {
+    width: 15px;
+    height: 5px;
+    border-style: solid;
+    border-width: 0 0 5px 5px;
+    border-color: var(--primary-color);
+    rotate: -45deg;
+}
+.no {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--button-color);
+    font-size: 28px;
+    font-weight: 900;
+    height: 100%;
+    width: 100%;
+}
+.yes:active, .no:active {
+    background-color: var(--forth-color);
+    border-radius: 50%;
 }
 .input-btn-container {
     width: 50%;
@@ -351,9 +426,7 @@ li.nav.open {
     box-sizing: border-box;
     transition: 0.2s ; 
 }
-.task-name {
 
-}
 .task-date {
     background-color: #d6a1ff;
     border-radius: 100px;

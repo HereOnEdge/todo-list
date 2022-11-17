@@ -263,6 +263,9 @@ let detailShower = () => {
 
             let newTaskContainer = document.createElement("div");
             newTaskContainer.classList.add("new-task-container");
+            let flippingCard = document.createElement("div");
+            flippingCard.classList.add("flipping-card");
+            flippingCard.appendChild(newTaskContainer);
             let input_btnContainer = document.createElement("div");
             input_btnContainer.classList.add("input-btn-container");
             let btn = document.createElement("div");
@@ -290,18 +293,7 @@ let detailShower = () => {
             options.appendChild(dateContainer);
             newTaskContainer.appendChild(input_btnContainer);
             newTaskContainer.appendChild(options);
-            // make a button for setting a task as important or not
-
-            // let important_btn = document.createElement("div");
-            // important_btn.classList.add("important-btn");
-            // let important_img = document.createElement("img");
-            // important_img.classList.add("important-img");
-            // important_img.src = importantImgUrl;
-            // important_img.alt = "important icon";
-            // important_btn.appendChild(important_img);
-            // options.appendChild(important_btn);
-
-            tasksContainer.appendChild(newTaskContainer);
+            tasksContainer.appendChild(flippingCard);
 
             // set a listener on task adder button 
             (function taskAdder() {
@@ -312,18 +304,63 @@ let detailShower = () => {
                     };
                     let taskName = newTask.value;
                     let taskDate = newTaskTime.value;
-                    let task = projectObject.addTask(taskName, taskDate, true);
-                    projectObject.tasks.push(task);
-                    newTask.value = '';
-                    newTaskTime.value = '';
-                    let oldTasks = document.querySelectorAll(`#task${projectObject.id}`);
-                    for (let oldTask of oldTasks) {
-                        oldTask.remove();
+                    let taskImportance = false;
+                    // flip the new task's section to ask if the task is important or not
+                    let flippingCard = document.querySelector(".flipping-card");
+                    flippingCard.classList.add("flipped");
+                    let importanceSide = document.createElement("div");
+                    importanceSide.classList.add("newTask-backSide");
+                    let question = document.createElement("span");
+                    question.textContent = "is this shit realy important?";
+                    question.classList.add("importance-question");
+                    let buttons = document.createElement('div');
+                    buttons.classList.add("importance-buttons");
+                    // make two buttons for no and yes
+                    let yesButton = document.createElement("div");
+                    yesButton.classList.add("yes-button");
+                    yesButton.tabIndex = "1";
+                    let yes = document.createElement("div")
+                    yes.classList.add("yes");
+                    let noButton = document.createElement("div");
+                    noButton.classList.add("no-button");
+                    noButton.tabIndex = "2";
+                    let no = document.createElement("div");
+                    no.classList.add("no");
+                    no.textContent = "x";
+                    yesButton.appendChild(yes);
+                    noButton.appendChild(no);
+                    buttons.appendChild(noButton);
+                    buttons.appendChild(yesButton);
+                    importanceSide.appendChild(buttons);
+                    importanceSide.appendChild(question);
+                    flippingCard.appendChild(importanceSide); 
+                    // focus yesButton so you can easily press enter to pass your answer
+                    yesButton.focus()
+                    // check for an answer that if task is important or not
+                    yesButton.addEventListener("click", ()=> {
+                        taskImportance = true;
+                        taskHandler();
+                    });
+                    noButton.addEventListener("click", () => {
+                        taskHandler();
+                    })
+                    // make a function to add the task and display everything in it's place 
+                    function taskHandler() {
+                        let task = projectObject.addTask(taskName, taskDate, taskImportance);
+                        flippingCard.classList.remove("flipped");
+                        projectObject.tasks.push(task);
+                        newTask.value = '';
+                        newTaskTime.value = '';
+                        let oldTasks = document.querySelectorAll(`#task${projectObject.id}`);
+                        for (let oldTask of oldTasks) {
+                            oldTask.remove();
+                        }
+                        displayTasks();
+                        project.style.height = `${100 + tasks.length * 50}px`;
+                        let taskCounter = document.querySelector(`#taskCounter${projectObject.id}`);
+                        taskCounter.textContent = tasks.length;
+
                     }
-                    displayTasks();
-                    project.style.height = `${100 + tasks.length * 50}px`;
-                    let taskCounter = document.querySelector(`#taskCounter${projectObject.id}`);
-                    taskCounter.textContent = tasks.length;
                 });
                 // make task adder button work on enter button when you are on task name input
                 newTask.addEventListener("keypress", (event) => {
