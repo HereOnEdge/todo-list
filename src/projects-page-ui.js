@@ -265,6 +265,7 @@ let detailShower = () => {
             newTaskContainer.classList.add("new-task-container");
             let flippingCard = document.createElement("div");
             flippingCard.classList.add("flipping-card");
+            flippingCard.id = `flipping-card${id}`;
             flippingCard.appendChild(newTaskContainer);
             let input_btnContainer = document.createElement("div");
             input_btnContainer.classList.add("input-btn-container");
@@ -306,7 +307,7 @@ let detailShower = () => {
                     let taskDate = newTaskTime.value;
                     let taskImportance = false;
                     // flip the new task's section to ask if the task is important or not
-                    let flippingCard = document.querySelector(".flipping-card");
+                    let flippingCard = document.querySelector(`#flipping-card${projectObject.id}`);
                     flippingCard.classList.add("flipped");
                     let importanceSide = document.createElement("div");
                     importanceSide.classList.add("newTask-backSide");
