@@ -347,13 +347,33 @@ let detailShower = () => {
             function displayTasks() {
                 for (let y = 0; y < tasks.length; y++) {
                     let domTask = document.createElement("li");
+                    let taskName = document.createElement("span");
+                    taskName.classList.add("task-name");
+                    taskName.textContent = tasks[y].name;
+                    domTask.appendChild(taskName);
+                    let taskDate = document.createElement("span");
+                    taskDate.classList.add("task-date");
+                    taskDate.textContent = tasks[y].date;
+                    domTask.appendChild(taskDate);
                     domTask.classList.add("task");
                     domTask.id = `task${projectObject.id}`
-                    domTask.textContent = tasks[y].name;
+                    if(tasks[y].important === true){
+                        domTask.classList.add("important");
+                    }
                     tasksContainer.appendChild(domTask);
                 }
             };
             displayTasks();
+
+            // check for important tasks and give them priority and design
+            function importance() {
+                let importantOnes = [];
+                for(let i = 0; i < projectObject.tasks; i++){
+                    if(projectObject.tasks[i].important === true){
+                        importantOnes.push(projectObject.tasks[i]);
+                    }
+                }
+            }
         })
     }
 }
