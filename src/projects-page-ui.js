@@ -263,6 +263,10 @@ let detailShower = () => {
 
             let newTaskContainer = document.createElement("div");
             newTaskContainer.classList.add("new-task-container");
+            let flippingCard = document.createElement("div");
+            flippingCard.classList.add("flipping-card");
+            flippingCard.id = `flipping-card${id}`;
+            flippingCard.appendChild(newTaskContainer);
             let input_btnContainer = document.createElement("div");
             input_btnContainer.classList.add("input-btn-container");
             let btn = document.createElement("div");
@@ -283,6 +287,7 @@ let detailShower = () => {
             let newTaskTime = document.createElement("input");
             newTaskTime.type = "date";
             newTaskTime.id = "newTaskTime-input";
+            newTaskTime.tabIndex = "-1";
             let options = document.createElement("div");
             options.classList.add("newTask-options");
             dateContainer.appendChild(dateIcon);
@@ -290,18 +295,7 @@ let detailShower = () => {
             options.appendChild(dateContainer);
             newTaskContainer.appendChild(input_btnContainer);
             newTaskContainer.appendChild(options);
-            // make a button for setting a task as important or not
-
-            // let important_btn = document.createElement("div");
-            // important_btn.classList.add("important-btn");
-            // let important_img = document.createElement("img");
-            // important_img.classList.add("important-img");
-            // important_img.src = importantImgUrl;
-            // important_img.alt = "important icon";
-            // important_btn.appendChild(important_img);
-            // options.appendChild(important_btn);
-
-            tasksContainer.appendChild(newTaskContainer);
+            tasksContainer.appendChild(flippingCard);
 
             // set a listener on task adder button 
             (function taskAdder() {
@@ -310,20 +304,83 @@ let detailShower = () => {
                         newTask.focus();
                         return;
                     };
-                    let taskName = newTask.value;
-                    let taskDate = newTaskTime.value;
-                    let task = projectObject.addTask(taskName, taskDate, true);
-                    projectObject.tasks.push(task);
-                    newTask.value = '';
-                    newTaskTime.value = '';
-                    let oldTasks = document.querySelectorAll(`#task${projectObject.id}`);
-                    for (let oldTask of oldTasks) {
-                        oldTask.remove();
+                    let taskName = '';
+                    let taskDate = '';
+                    let taskImportance = false;
+                    // flip the new task's section to ask if the task is important or not
+                    let flippingCard = document.querySelector(`#flipping-card${projectObject.id}`);
+                    flippingCard.classList.add("flipped");
+                    let importanceSide = document.createElement("div");
+                    importanceSide.classList.add("newTask-backSide");
+                    let question = document.createElement("span");
+                    question.textContent = "is this shit realy important?";
+                    question.classList.add("importance-question");
+                    let buttons = document.createElement('div');
+                    buttons.classList.add("importance-buttons");
+                    // make two buttons for no and yes
+                    let yesButton = document.createElement("div");
+                    yesButton.classList.add("yes-button");
+                    yesButton.tabIndex = "2";
+                    let yes = document.createElement("div")
+                    yes.classList.add("yes");
+                    let noButton = document.createElement("div");
+                    noButton.classList.add("no-button");
+                    noButton.tabIndex = "1";
+                    let no = document.createElement("div");
+                    no.classList.add("no");
+                    no.textContent = "x";
+                    yesButton.appendChild(yes);
+                    noButton.appendChild(no);
+                    buttons.appendChild(noButton);
+                    buttons.appendChild(yesButton);
+                    importanceSide.appendChild(buttons);
+                    importanceSide.appendChild(question);
+                    flippingCard.appendChild(importanceSide);
+                    // focus yesButton so you can easily press enter to pass your answer
+                    setTimeout(() => {
+                        noButton.focus();
+                    }, 300);
+                    // check for an answer that if task is important or not
+                    yesButton.addEventListener("click", () => {
+                        taskImportance = true;
+                        taskName = newTask.value;
+                        taskDate = newTaskTime.value;
+                        taskHandler();
+                    });
+                    noButton.addEventListener("click", () => {
+                        taskImportance = false;
+                        taskName = newTask.value;
+                        taskDate = newTaskTime.value;
+                        taskHandler();
+                    })
+                    // click yes or no buttons using enter key on keyboard
+                    yesButton.addEventListener("keyup", (event) => {
+                        if (event.keyCode === 13) {
+                            yesButton.click();
+                        }
+                    });
+                    noButton.addEventListener("keyup", (event) => {
+                        if (event.keyCode === 13) {
+                            noButton.click();
+                        }
+                    })
+                    // make a function to add the task and display everything in it's place 
+                    function taskHandler() {
+                        let task = projectObject.addTask(taskName, taskDate, taskImportance);
+                        flippingCard.classList.remove("flipped");
+                        projectObject.tasks.push(task);
+                        newTask.value = '';
+                        newTaskTime.value = '';
+                        let oldTasks = document.querySelectorAll(`#task${projectObject.id}`);
+                        for (let oldTask of oldTasks) {
+                            oldTask.remove();
+                        }
+                        displayTasks();
+                        project.style.height = `${100 + tasks.length * 50}px`;
+                        let taskCounter = document.querySelector(`#taskCounter${projectObject.id}`);
+                        taskCounter.textContent = tasks.length;
+
                     }
-                    displayTasks();
-                    project.style.height = `${100 + tasks.length * 50}px`;
-                    let taskCounter = document.querySelector(`#taskCounter${projectObject.id}`);
-                    taskCounter.textContent = tasks.length;
                 });
                 // make task adder button work on enter button when you are on task name input
                 newTask.addEventListener("keypress", (event) => {
@@ -332,8 +389,8 @@ let detailShower = () => {
                     };
                 });
                 // make task adder button work on calender when you click enter key
-                newTaskTime.addEventListener("keypress", (event)=> {
-                    if(event.keyCode === 13){
+                newTaskTime.addEventListener("keypress", (event) => {
+                    if (event.keyCode === 13) {
                         btn.click();
                     };
                 });
@@ -347,13 +404,33 @@ let detailShower = () => {
             function displayTasks() {
                 for (let y = 0; y < tasks.length; y++) {
                     let domTask = document.createElement("li");
+                    let taskName = document.createElement("span");
+                    taskName.classList.add("task-name");
+                    taskName.textContent = tasks[y].name;
+                    domTask.appendChild(taskName);
+                    let taskDate = document.createElement("span");
+                    taskDate.classList.add("task-date");
+                    taskDate.textContent = tasks[y].date;
+                    domTask.appendChild(taskDate);
                     domTask.classList.add("task");
                     domTask.id = `task${projectObject.id}`
-                    domTask.textContent = tasks[y].name;
+                    if (tasks[y].important === true) {
+                        domTask.classList.add("important");
+                    }
                     tasksContainer.appendChild(domTask);
                 }
             };
             displayTasks();
+
+            // check for important tasks and give them priority and design
+            function importance() {
+                let importantOnes = [];
+                for (let i = 0; i < projectObject.tasks; i++) {
+                    if (projectObject.tasks[i].important === true) {
+                        importantOnes.push(projectObject.tasks[i]);
+                    }
+                }
+            }
         })
     }
 }
