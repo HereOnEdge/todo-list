@@ -6,7 +6,9 @@ import editImgUrl from "./img/edit-icon.png";
 import removeImgUrl from "./img/remove-icon.png";
 import infoImgUrl from "./img/info-icon.png";
 import calendarImgUrl from "./img/calendar.png";
-import importantImgUrl from "./img/important.png";
+import stickyBackgroundUrl from "./img/sticky.jpg";
+import coffeeBackgroundUrl from "./img/coffe.jpg";
+import laptopBackgroundUrl from "./img/laptop.jpg";
 
 // display projects on main screen
 export default (function projectsDisplayer() {
@@ -17,6 +19,11 @@ export default (function projectsDisplayer() {
             return;
         }
         mainScreen.innerHTML = "";
+        // mainScreen.style.backgroundImage = `url(${stickyBackgroundUrl})`;
+        mainScreen.style.backgroundImage = `url(${coffeeBackgroundUrl})`;
+        // mainScreen.style.backgroundImage = `url(${laptopBackgroundUrl})`;
+        console.log(stickyBackgroundUrl)
+        console.log(mainScreen.style);
         const topScreen = document.createElement("div");
         topScreen.classList.add("top-screen");
         const bottomScreen = document.createElement("div");

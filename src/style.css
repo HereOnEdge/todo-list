@@ -76,7 +76,7 @@ main {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    background-color:rgba(20,20,20,0.3);
+    /* background-color:rgba(20,20,20,0.3); */
 }
 .top-screen h2 {
     height: 90px;
@@ -101,7 +101,7 @@ main {
     justify-content: flex-start;
     border-radius: 20px;
     margin-bottom: 10%;
-    box-shadow: 0 5px 8px 5px var(--box-shadow-color);
+    box-shadow: 0 5px 8px 0 var(--box-shadow-color);
     
 }
 .bottom-screen {
@@ -111,7 +111,7 @@ main {
     justify-content: center;
     gap: 1px;
     align-items: center;
-    background-color:rgba(20,20,20,0.3);
+    /* background-color:rgba(20,20,20,0.3); */
 }
 .bottom-title {
     width: clamp( 300px,90% , 650px);
@@ -210,7 +210,7 @@ li.nav.open {
     padding: 15px 0;
     margin-bottom: 5vh;
     border-radius: 20px;
-    box-shadow: 0 5px 8px 5px var(--box-shadow-color);
+    box-shadow: 0 5px 8px 0 var(--box-shadow-color);
 }
 .Projects-ul {
     padding-left: 38px;
