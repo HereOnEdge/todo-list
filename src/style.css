@@ -44,7 +44,8 @@ main {
     align-self: center;
     justify-self: center;
     height: 80%;
-    width: 70vw;
+    width: 100vw;
+    max-width: 850px;
     border: 5px solid var(--secondary-color);
     border-radius: 20px;
     /* padding: 0 10vw; */
