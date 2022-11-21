@@ -43,9 +43,9 @@ main {
     color: var(--primary-text-color);
     align-self: center;
     justify-self: center;
-    height: 80%;
+    height: 85%;
     width: 100vw;
-    max-width: 850px;
+    max-width: 900px;
     border: 5px solid var(--secondary-color);
     border-radius: 20px;
     /* padding: 0 10vw; */
