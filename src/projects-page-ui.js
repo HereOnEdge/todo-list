@@ -5,10 +5,8 @@ import doneImgUrl from "./img/checklist.png";
 import editImgUrl from "./img/edit-icon.png";
 import removeImgUrl from "./img/remove-icon.png";
 import infoImgUrl from "./img/info-icon.png";
-import calendarImgUrl from "./img/calendar.png";
 import stickyBackgroundUrl from "./img/sticky.jpg";
 import coffeeBackgroundUrl from "./img/coffe.jpg";
-import laptopBackgroundUrl from "./img/laptop.jpg";
 
 // display projects on main screen
 export default (function projectsDisplayer() {
