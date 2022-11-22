@@ -391,10 +391,10 @@ li.nav.open {
     gap: min(10px , 5%);
     margin-left: -10px;
 }
-.addTask-button {
+.addTask-button ,.sort-button{
     margin-left: auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     width: 30%;
     min-width: 100px;
@@ -419,16 +419,22 @@ li.nav.open {
     color: var(--secondary-color);
 }
 .addTask-button-plus {
-    font-weight: 700;
-    font-size: 20px;
+    font-weight: normal;
+    font-size: 30px;
     width: 20%;
     height: 100%;
-    color: var(--button-color);
+    color: var(--secondary-color);
 }
 .addTask-button-plus, .addTask-button-txt {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.sort-button {
+    content: "Important";
+}
+.sorted {
+    content: "All";
 }
 .newTask-backSide, .new-task-container {
     position: absolute;

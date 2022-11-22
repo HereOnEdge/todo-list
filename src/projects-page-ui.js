@@ -330,10 +330,32 @@ let detailShower = () => {
                     }, 1000);
                 })
             }
+            sortImportant();
             addTaskButton();
-            // newTaskContainer.appendChild(options);
             tasksContainer.appendChild(flippingCard);
-
+            // make a button to sort buttons that are important
+            function sortImportant() {
+                let sorted = document.querySelector(`sorted${projectObject.id}`);
+                if (sorted) {
+                    sorted.addEventListener("click", () => {
+                        sortButton.classList.remove(`sorted${projectObject.id}`);
+                        display.none();
+                        display.all();
+                    })
+                } else {
+                    let sortButton = document.createElement("div");
+                    sortButton.textContent = "Sort as IMPORTANT";
+                    sortButton.classList.add("sort-button");
+                    newTaskContainer.appendChild(sortButton);
+                    // if clicked, remove every task from dom and only add those that are important
+                    sortButton.addEventListener("click", () => {
+                        sortButton.classList.add(`sorted${projectObject.id}`);
+                        sortButton.textContent = "All";
+                        display.none();
+                        display.important()
+                    })
+                }
+            }
             // set a listener on task adder button 
             (function taskAdder() {
                 btn.addEventListener("click", () => {
@@ -409,14 +431,15 @@ let detailShower = () => {
                         // remove task inputs and put newtask button back in its place
                         newTaskContainer.removeChild(input_btnContainer);
                         newTaskContainer.removeChild(options);
-                        newTask.value ="";
+                        newTask.value = "";
                         newTaskTime = "";
                         addTaskButton();
-                        let oldTasks = document.querySelectorAll(`#task${projectObject.id}`);
-                        for (let oldTask of oldTasks) {
-                            oldTask.remove();
-                        }
-                        displayTasks();
+                        display.none();
+                        // let oldTasks = document.querySelectorAll(`#task${projectObject.id}`);
+                        // for (let oldTask of oldTasks) {
+                        //     oldTask.remove();
+                        // }
+                        display.all();
                         project.style.height = `${100 + tasks.length * 50}px`;
                         let taskCounter = document.querySelector(`#taskCounter${projectObject.id}`);
                         taskCounter.textContent = tasks.length;
@@ -443,25 +466,54 @@ let detailShower = () => {
 
             // add project's tasks to it
             function displayTasks() {
-                for (let y = 0; y < tasks.length; y++) {
-                    let domTask = document.createElement("li");
-                    let taskName = document.createElement("span");
-                    taskName.classList.add("task-name");
-                    taskName.textContent = tasks[y].name;
-                    domTask.appendChild(taskName);
-                    let taskDate = document.createElement("span");
-                    taskDate.classList.add("task-date");
-                    taskDate.textContent = tasks[y].date;
-                    domTask.appendChild(taskDate);
-                    domTask.classList.add("task");
-                    domTask.id = `task${projectObject.id}`
-                    if (tasks[y].important === true) {
-                        domTask.classList.add("important");
+                let tasksToShow = [];
+                const __TaskDisplayer = () => {
+                    console.log("displayer runned")
+                    for (let y = 0; y < tasksToShow.length; y++) {
+                        console.log("entered loop")
+                        let domTask = document.createElement("li");
+                        let taskName = document.createElement("span");
+                        taskName.classList.add("task-name");
+                        taskName.textContent = tasksToShow[y].name;
+                        domTask.appendChild(taskName);
+                        let taskDate = document.createElement("span");
+                        taskDate.classList.add("task-date");
+                        taskDate.textContent = tasksToShow[y].date;
+                        domTask.appendChild(taskDate);
+                        domTask.classList.add("task");
+                        domTask.id = `task${projectObject.id}`
+                        console.log(domTask)
+                        if (tasksToShow[y].important === true) {
+                            domTask.classList.add("important");
+                        };
+                        tasksContainer.appendChild(domTask);
                     }
-                    tasksContainer.appendChild(domTask);
                 }
+                const none = () => {
+                    let oldTasks = document.querySelectorAll(`#task${projectObject.id}`);
+                    for (let oldTask of oldTasks) {
+                        oldTask.remove();
+                    }
+                }
+                const all = () => {
+                    console.log("all runed")
+                    for (let y = 0; y < tasks.length; y++) {
+                        tasksToShow.push(tasks[y])
+                    };
+                    __TaskDisplayer();
+                };
+                const important = () => {
+                    for (let y = 0; y < tasks.length; y++) {
+                        if (tasks[y].important) {
+                            tasksToShow.push(tasks[y])
+                        }
+                    }
+                    __TaskDisplayer();
+                }
+                return { all, important, none };
             };
-            displayTasks();
+            let display = displayTasks();
+            display.all();
 
             // check for important tasks and give them priority and design
             function importance() {
