@@ -335,24 +335,35 @@ let detailShower = () => {
             tasksContainer.appendChild(flippingCard);
             // make a button to sort buttons that are important
             function sortImportant() {
-                let sorted = document.querySelector(`sorted${projectObject.id}`);
+                let sorted = document.querySelector(`.sorted${projectObject.id}`);
+                console.log(sorted)
                 if (sorted) {
+                    console.log("sorted exists")
                     sorted.addEventListener("click", () => {
-                        sortButton.classList.remove(`sorted${projectObject.id}`);
+                        sorted.textContent = "Important"
+                        sorted.classList.remove(`sorted${projectObject.id}`);
                         display.none();
                         display.all();
+                        sortImportant();
                     })
                 } else {
-                    let sortButton = document.createElement("div");
-                    sortButton.textContent = "Sort as IMPORTANT";
-                    sortButton.classList.add("sort-button");
-                    newTaskContainer.appendChild(sortButton);
+                    let sortButton = null;
+                    if(document.querySelector(`#sort${projectObject.id}`)) {
+                        sortButton = document.querySelector(`#sort${projectObject.id}`);
+                    } else {
+                        sortButton = document.createElement("div");
+                        sortButton.textContent = "Important";
+                        sortButton.classList.add("sort-button");
+                        sortButton.id = `sort${projectObject.id}`;
+                        newTaskContainer.appendChild(sortButton);
+                    }
                     // if clicked, remove every task from dom and only add those that are important
                     sortButton.addEventListener("click", () => {
                         sortButton.classList.add(`sorted${projectObject.id}`);
                         sortButton.textContent = "All";
                         display.none();
-                        display.important()
+                        display.important();
+                        sortImportant();
                     })
                 }
             }
@@ -440,10 +451,6 @@ let detailShower = () => {
                         //     oldTask.remove();
                         // }
                         display.all();
-                        project.style.height = `${100 + tasks.length * 50}px`;
-                        let taskCounter = document.querySelector(`#taskCounter${projectObject.id}`);
-                        taskCounter.textContent = tasks.length;
-
                     }
                 });
                 // make task adder button work on enter button when you are on task name input
@@ -485,6 +492,9 @@ let detailShower = () => {
                         };
                         tasksContainer.appendChild(domTask);
                     }
+                    project.style.height = `${100 + tasksToShow.length * 50}px`;
+                    let taskCounter = document.querySelector(`#taskCounter${projectObject.id}`);
+                    taskCounter.textContent = tasksToShow.length;
                 }
                 const none = () => {
                     let oldTasks = document.querySelectorAll(`#task${projectObject.id}`); 
