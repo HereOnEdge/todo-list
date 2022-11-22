@@ -320,8 +320,11 @@ let detailShower = () => {
                 // hide the button on click and show inputs
                 addTask.addEventListener("click", () => {
                     addTask.classList.add("hidden");
+                    let sortButton = document.querySelector(`#sort${projectObject.id}`);
+                    sortButton.classList.add("hidden")
                     setTimeout(() => {
                         addTask.remove();
+                        sortButton.remove();
                         newTaskContainer.appendChild(input_btnContainer);
                         newTaskContainer.appendChild(options)
                         let dateIcon = document.querySelector(".datepicker-icon");
@@ -444,6 +447,7 @@ let detailShower = () => {
                         newTaskContainer.removeChild(options);
                         newTask.value = "";
                         newTaskTime = "";
+                        sortImportant();
                         addTaskButton();
                         display.none();
                         // let oldTasks = document.querySelectorAll(`#task${projectObject.id}`);

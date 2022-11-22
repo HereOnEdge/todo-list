@@ -407,10 +407,10 @@ li.nav.open {
     font-size: 16px;
     cursor: pointer;
 }
-.addTask-button:hover {
+.addTask-button:hover, .sort-button:hover {
     background-color: var(--forth-color);
 }
-.addTask-button.hidden {
+.hidden {
     opacity: 0;
 }
 .addTask-button-txt {
@@ -429,12 +429,6 @@ li.nav.open {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-.sort-button {
-    content: "Important";
-}
-.sorted {
-    content: "All";
 }
 .newTask-backSide, .new-task-container {
     position: absolute;
