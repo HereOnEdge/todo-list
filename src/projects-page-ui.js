@@ -304,12 +304,35 @@ let detailShower = () => {
             newTaskTime.tabIndex = "-1";
             dateContainer.appendChild(newTaskTime);
             options.appendChild(dateContainer);
-            newTaskContainer.appendChild(input_btnContainer);
-            newTaskContainer.appendChild(options);
+            // create a button that if clicked, new task inputs appear
+            function addTaskButton() {
+                let addTask = document.createElement("div");
+                addTask.classList.add("addTask-button");
+                let addTaskTxt = document.createElement("span");
+                addTaskTxt.textContent = "Add Task";
+                addTaskTxt.classList.add("addTask-button-txt");
+                addTask.appendChild(addTaskTxt);
+                let addTaskPLus = document.createElement("span");
+                addTaskPLus.classList.add("addTask-button-plus");
+                addTaskPLus.textContent = "+";
+                addTask.appendChild(addTaskPLus);
+                newTaskContainer.appendChild(addTask);
+                // hide the button on click and show inputs
+                addTask.addEventListener("click", () => {
+                    addTask.classList.add("hidden");
+                    setTimeout(() => {
+                        addTask.remove();
+                        newTaskContainer.appendChild(input_btnContainer);
+                        newTaskContainer.appendChild(options)
+                        let dateIcon = document.querySelector(".datepicker-icon");
+                        dateIcon.innerHTML = '<path d="M4.684 11.523v-2.3h2.261v-.61H4.684V6.801h2.464v-.61H4v5.332h.684zm3.296 0h.676V8.98c0-.554.227-1.007.953-1.007.125 0 .258.004.329.015v-.613a1.806 1.806 0 0 0-.254-.02c-.582 0-.891.32-1.012.567h-.02v-.504H7.98v4.105zm2.805-5.093c0 .238.192.425.43.425a.428.428 0 1 0 0-.855.426.426 0 0 0-.43.43zm.094 5.093h.672V7.418h-.672v4.105z"/>'
+                        dateIcon.innerHTML += '<path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>';
+                    }, 1000);
+                })
+            }
+            addTaskButton();
+            // newTaskContainer.appendChild(options);
             tasksContainer.appendChild(flippingCard);
-            let dateIcon = document.querySelector(".datepicker-icon");
-            dateIcon.innerHTML = '<path d="M4.684 11.523v-2.3h2.261v-.61H4.684V6.801h2.464v-.61H4v5.332h.684zm3.296 0h.676V8.98c0-.554.227-1.007.953-1.007.125 0 .258.004.329.015v-.613a1.806 1.806 0 0 0-.254-.02c-.582 0-.891.32-1.012.567h-.02v-.504H7.98v4.105zm2.805-5.093c0 .238.192.425.43.425a.428.428 0 1 0 0-.855.426.426 0 0 0-.43.43zm.094 5.093h.672V7.418h-.672v4.105z"/>'
-            dateIcon.innerHTML += '<path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>';
 
             // set a listener on task adder button 
             (function taskAdder() {
@@ -383,8 +406,12 @@ let detailShower = () => {
                         let task = projectObject.addTask(taskName, taskDate, taskImportance);
                         flippingCard.classList.remove("flipped");
                         projectObject.tasks.push(task);
-                        newTask.value = '';
-                        newTaskTime.value = '';
+                        // remove task inputs and put newtask button back in its place
+                        newTaskContainer.removeChild(input_btnContainer);
+                        newTaskContainer.removeChild(options);
+                        newTask.value ="";
+                        newTaskTime = "";
+                        addTaskButton();
                         let oldTasks = document.querySelectorAll(`#task${projectObject.id}`);
                         for (let oldTask of oldTasks) {
                             oldTask.remove();

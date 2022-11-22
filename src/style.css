@@ -391,6 +391,45 @@ li.nav.open {
     gap: min(10px , 5%);
     margin-left: -10px;
 }
+.addTask-button {
+    margin-left: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 30%;
+    min-width: 100px;
+    height: 60%;
+    border-radius: 20px;
+    opacity: 1;
+    text-align: center;
+    background-color: var(--primary-color);
+    transition: opacity 1s;
+    font-size: 16px;
+    cursor: pointer;
+}
+.addTask-button:hover {
+    background-color: var(--forth-color);
+}
+.addTask-button.hidden {
+    opacity: 0;
+}
+.addTask-button-txt {
+    width: 80%;
+    height: 100%;
+    color: var(--secondary-color);
+}
+.addTask-button-plus {
+    font-weight: 700;
+    font-size: 20px;
+    width: 20%;
+    height: 100%;
+    color: var(--button-color);
+}
+.addTask-button-plus, .addTask-button-txt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .newTask-backSide, .new-task-container {
     position: absolute;
     height: 100%;
