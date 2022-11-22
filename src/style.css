@@ -392,20 +392,20 @@ li.nav.open {
     margin-left: -10px;
 }
 .addTask-button ,.sort-button{
-    margin-left: auto;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 30%;
     min-width: 100px;
     height: 60%;
-    border-radius: 20px;
+    border-radius: 10px;
     opacity: 1;
     text-align: center;
     background-color: var(--primary-color);
     transition: opacity 1s;
     font-size: 16px;
     cursor: pointer;
+    flex: 0 0 0;
 }
 .addTask-button:hover, .sort-button:hover {
     background-color: var(--forth-color);
@@ -542,12 +542,11 @@ li.nav.open {
     align-items: center;
     color: var(--secondary-color);
     background-color: var(--primary-color);
-    border-radius: 100px 100px 100px 0;
-    margin-left: auto;
-    margin-right: auto;
+    border-radius: 10px;
+    margin-right: auto;    
     margin-bottom: 10px;
     padding-left: 5px;
-    width: 75%;
+    width: 90%;
     height: 40px;
     font-size: 20px;
     box-sizing: border-box;
@@ -565,11 +564,12 @@ li.nav.open {
     content: '';
     background-color: var(--button-color);
     position: absolute;
-    border-radius: 0 0 40px 0;
+    border-radius: 0 0 10px 0;
     width: 30px;
-    height: 100%;
+    height: 50%;
     margin-right: -10px;
     right: 0;
+    top: 0;
     aspect-ratio: 1 /1;
     z-index: -1;
     transition: 0.2s;
