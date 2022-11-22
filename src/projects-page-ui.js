@@ -468,9 +468,7 @@ let detailShower = () => {
             function displayTasks() {
                 let tasksToShow = [];
                 const __TaskDisplayer = () => {
-                    console.log("displayer runned")
                     for (let y = 0; y < tasksToShow.length; y++) {
-                        console.log("entered loop")
                         let domTask = document.createElement("li");
                         let taskName = document.createElement("span");
                         taskName.classList.add("task-name");
@@ -482,7 +480,6 @@ let detailShower = () => {
                         domTask.appendChild(taskDate);
                         domTask.classList.add("task");
                         domTask.id = `task${projectObject.id}`
-                        console.log(domTask)
                         if (tasksToShow[y].important === true) {
                             domTask.classList.add("important");
                         };
@@ -490,13 +487,13 @@ let detailShower = () => {
                     }
                 }
                 const none = () => {
-                    let oldTasks = document.querySelectorAll(`#task${projectObject.id}`);
+                    let oldTasks = document.querySelectorAll(`#task${projectObject.id}`); 
                     for (let oldTask of oldTasks) {
+                        tasksToShow.pop();
                         oldTask.remove();
                     }
                 }
                 const all = () => {
-                    console.log("all runed")
                     for (let y = 0; y < tasks.length; y++) {
                         tasksToShow.push(tasks[y])
                     };
