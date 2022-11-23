@@ -541,7 +541,7 @@ li.nav.open {
     justify-content: space-between;
     align-items: center;
     color: var(--secondary-color);
-    background-color: var(--primary-color);
+    background-color: var(--forth-color);
     border-radius: 10px;
     margin-right: auto;    
     margin-bottom: 10px;
@@ -558,7 +558,7 @@ li.nav.open {
     padding-left: 10px;
 }
 .task-date {
-    background-color: #d6a1ff;
+    /* background-color: #d6a1ff; */
     border-radius: 100px;
     margin-right: 20%;
     width: 25%;
@@ -566,7 +566,7 @@ li.nav.open {
 }
 .task.important::after {
     content: '';
-    background-color: var(--button-color);
+    background-color: var(--primary-color);
     position: absolute;
     border-radius: 20px 10px 10px 30px;
     width: 10%;
