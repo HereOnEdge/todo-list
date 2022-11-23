@@ -401,14 +401,16 @@ li.nav.open {
     border-radius: 10px;
     opacity: 1;
     text-align: center;
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color);
+    color: var(--primary-color); 
     transition: opacity 1s;
     font-size: 16px;
     cursor: pointer;
     flex: 0 0 0;
 }
 .addTask-button:hover, .sort-button:hover {
-    background-color: var(--forth-color);
+    background-color: var(--primary-color);
+    color: var(--primary-text-color);
 }
 .hidden {
     opacity: 0;
@@ -416,14 +418,12 @@ li.nav.open {
 .addTask-button-txt {
     width: 80%;
     height: 100%;
-    color: var(--secondary-color);
 }
 .addTask-button-plus {
     font-weight: normal;
     font-size: 30px;
     width: 20%;
     height: 100%;
-    color: var(--secondary-color);
 }
 .addTask-button-plus, .addTask-button-txt {
     display: flex;
