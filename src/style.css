@@ -552,7 +552,8 @@ li.nav.open {
     font-weight: 100;
     box-sizing: border-box;
     transition: 0.2s ; 
-    box-shadow: 1px 1px 6px var(--secondary-color);
+    overflow: hidden;
+    /* box-shadow: 1px 1px 6px var(--secondary-color); */
 }
 .task-name {
     padding-left: 10px;
@@ -569,14 +570,13 @@ li.nav.open {
     background-color: var(--primary-color);
     color: var(--secondary-color);
     position: absolute;
-    border-radius: 20px 10px 10px 30px;
-    width: 10%;
-    height: 80%;
-    margin-right: -10px;
-    right:  4px;
-    top: -4px;
+    border-radius: 10px 20px 10px 30px;
+    width: 5%;
+    height: 50%;
+    right:  1px;
+    top: 1px;
     aspect-ratio: 1 /1;
-    z-index: -1;
+    z-index: 1;
     transition: 0.2s;
 }
 .task.important:hover::after {
@@ -584,11 +584,10 @@ li.nav.open {
     font-size: 10px;
     display: flex;
     justify-content: flex-end;
-    padding-right: 10px;
     align-items: center;
+    justify-content: center;
     width: 20%;
-    margin-right: -68px;
-    z-index: -1;
+    z-index: 1;
     transition: 0.2s;
 }
 .important-btn {
