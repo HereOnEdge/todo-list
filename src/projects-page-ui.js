@@ -521,7 +521,15 @@ let detailShower = () => {
                         };
                         tasksContainer.appendChild(domTask);
                     }
-                    project.style.height = `${100 + tasksToShow.length * 50}px`;
+                    let combinedHeight = 0;
+                    let taskNodes = document.querySelectorAll(`#task${id}`);
+                    for(let node of taskNodes) {
+                        let style = getComputedStyle(node)
+                        let height = style.height;
+                        let splitted = height.split("px")
+                        combinedHeight += +splitted[0];
+                    }
+                    project.style.height = `${100 + combinedHeight + (tasksToShow.length * 10)}px`;
                     let taskCounter = document.querySelector(`#taskCounter${projectObject.id}`);
                     taskCounter.textContent = tasksToShow.length;
                 }
