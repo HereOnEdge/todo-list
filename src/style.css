@@ -298,7 +298,7 @@ li.nav.open {
     font-size: 28px;
     color: var(--secondary-color);
     background-color: var(--third-color);
-    scale: 1.03;
+    /* scale: 1.03; */
 }
 .project.nav.open {
     height: auto;
@@ -410,8 +410,10 @@ li.nav.open {
     flex: 0 0 0;
 }
 .addTask-button:hover, .sort-button:hover {
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
+    background-color: #dfdfdf;
+}
+.addTask-button:hover .addTask-button-plus {
+    color: var(--button-color);
 }
 .hidden {
     opacity: 0;
@@ -443,8 +445,8 @@ li.nav.open {
     flex-direction: column-reverse;
     justify-content: center;
     align-items:center;
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
+    background-color: var(--forth-color);
+    color: var(--secondary-color);
     border-radius: 100px;
 }
 .importance-question {
@@ -469,7 +471,7 @@ li.nav.open {
     box-sizing: border-box;
 }
 .yes-button {
-    border: 1px solid var(--primary-color);
+    border: 1px solid var(--complete-sign-color);
 }
 .no-button {
     border: 1px solid var(--button-color);
@@ -479,7 +481,7 @@ li.nav.open {
     height: 5px;
     border-style: solid;
     border-width: 0 0 5px 5px;
-    border-color: var(--primary-color);
+    border-color: var(--complete-sign-color);
     rotate: -45deg;
 }
 .no {
