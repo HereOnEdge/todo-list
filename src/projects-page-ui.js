@@ -348,7 +348,7 @@ let detailShower = () => {
             sortImportant();
             addTaskButton();
             tasksContainer.appendChild(flippingCard);
-            // make a button to sort buttons that are important
+            // make a button to sort tasks that are important
             function sortImportant() {
                 let sorted = document.querySelector(`.sorted${projectObject.id}`);
                 console.log(sorted)
@@ -461,7 +461,8 @@ let detailShower = () => {
                         newTaskContainer.removeChild(input_btnContainer);
                         newTaskContainer.removeChild(options);
                         newTask.value = "";
-                        newTaskDate = "";
+                        newTaskDate.value = "";
+                        newTaskTime.value = "";
                         sortImportant();
                         addTaskButton();
                         display.none();
@@ -496,6 +497,12 @@ let detailShower = () => {
                 const __TaskDisplayer = () => {
                     for (let y = 0; y < tasksToShow.length; y++) {
                         let domTask = document.createElement("li");
+                        let taskIsDoneContainer = document.createElement("div");
+                        taskIsDoneContainer.classList.add("doneTask-container");
+                        let doneMark = document.createElement("div");
+                        doneMark.classList.add("doneMark");
+                        taskIsDoneContainer.appendChild(doneMark);
+                        domTask.appendChild(taskIsDoneContainer);
                         let taskName = document.createElement("span");
                         taskName.classList.add("task-name");
                         taskName.textContent = tasksToShow[y].name;
@@ -504,6 +511,9 @@ let detailShower = () => {
                         taskDate.classList.add("task-date");
                         taskDate.textContent = tasksToShow[y].date;
                         domTask.appendChild(taskDate);
+                        let taskTags = document.createElement("div");
+                        taskTags.classList.add("task-tags");
+                        domTask.appendChild(taskTags);
                         domTask.classList.add("task");
                         domTask.id = `task${projectObject.id}`
                         if (tasksToShow[y].important === true) {
