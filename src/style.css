@@ -15,7 +15,6 @@
 }
 body {
     background-color: var(--forth-color);
-    /* background-image: url(./img/desk.jpg); */
     background-repeat: no-repeat;
     background-position: 1%;
     background-size: 100%;
@@ -49,7 +48,6 @@ main {
     max-width: 900px;
     border: 5px solid var(--secondary-color);
     border-radius: 20px;
-    /* padding: 0 10vw; */
     display: grid;
     align-items: center;
     justify-items: center;
@@ -105,7 +103,6 @@ main {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    /* background-color:rgba(20,20,20,0.3); */
 }
 .top-screen h2 {
     height: 90px;
@@ -120,7 +117,6 @@ main {
     text-align: center;
     color: 303030;
     text-shadow: 1px 1px 6px var(--primary-color);
-    /* background-image: linear-gradient(to right,rgba(20,20,20,0.8), rgba(20,20,20,0.6), rgba(20,20,20,0.4), rgba(20,20,20,0.2), rgba(20,20,20,0)); */
     background-image: linear-gradient(to right, rgba(220,220,200,0.4), rgba(220,220,200,0.8), rgba(220,220,200,0.4), rgba(220,220,200,0.4), rgba(220,220,200,0.2), rgba(220,220,200,0));
 }
 .contains-newProject {
@@ -140,7 +136,6 @@ main {
     justify-content: center;
     gap: 1px;
     align-items: center;
-    /* background-color:rgba(20,20,20,0.3); */
 }
 .bottom-title {
     width: clamp( 300px,90% , 650px);
@@ -154,7 +149,6 @@ main {
     font-weight: 900;
     text-shadow: 1px 1px 6px var(--primary-color);
     background-image: linear-gradient(to right, rgba(220,220,200,0.4), rgba(220,220,200,0.8), rgba(220,220,200,0.4), rgba(220,220,200,0.4), rgba(220,220,200,0.2), rgba(220,220,200,0));
-    /* background-image: linear-gradient(to right,rgba(20,20,20,0.8), rgba(20,20,20,0.6), rgba(20,20,20,0.4), rgba(20,20,20,0.2), rgba(20,20,20,0)); */
     color: var(--secondaty-color);
 }
 .description {
@@ -235,7 +229,6 @@ li.nav.open {
     color: var(--primary-text-color);
     width: clamp( 300px,90% , 650px);
     max-width: 550px;
-    /* min-height: 20vh; */
     padding: 15px 0;
     margin-bottom: 5vh;
     border-radius: 20px;
@@ -280,9 +273,6 @@ li.nav.open {
     width: 100%;
     font-size: 20px;
     font-weight: 600;
-    /* border-width: 0 0 1px 0;
-    border-style: solid;
-    border-color: rgba(200,200,200,0.3);*/
     border-radius: 10px; 
     position: relative;
     transition: 0.3s;
@@ -298,7 +288,6 @@ li.nav.open {
     font-size: 28px;
     color: var(--secondary-color);
     background-color: var(--third-color);
-    /* scale: 1.03; */
 }
 .project.nav.open {
     height: auto;
@@ -307,7 +296,8 @@ li.nav.open {
 .project.open {
     grid-template: "title counter" 40px
                     "tasks  . "   auto/
-                    1fr     25px;
+                    1fr     40px;
+    transition: 1s;
 }
 .project:hover {
     color: var(--secondary-color);
@@ -350,12 +340,13 @@ li.nav.open {
     width: 100%;
     margin-left: 20px;
     cursor: pointer;
-    flex: 1 1 80%;
+    flex: 0 1 80%;
 }
 .pp-spanTitle:nth-child(1) {
     text-transform: capitalize;
 }
 .taskCounter {
+    justify-self: center;
     grid-area: counter;
     display: flex;
     justify-content: center;
@@ -549,7 +540,6 @@ li.nav.open {
     border-radius: 10px;
     margin-right: auto;    
     margin-bottom: 10px;
-    padding-left: 5px;
     width: 100%;
     min-height: 40px;
     font-size: 20px;
@@ -557,7 +547,6 @@ li.nav.open {
     box-sizing: border-box;
     transition: 0.2s ; 
     overflow: hidden;
-    /* box-shadow: 1px 1px 6px var(--secondary-color); */
 }
 .doneTask-container {
     width: 5%;
@@ -590,7 +579,6 @@ li.nav.open {
     padding-left: 10px;
 }
 .task-date {
-    /* background-color: #d6a1ff; */
     border-radius: 100px;
 }
 .task.important::after {
@@ -685,7 +673,6 @@ li.nav.open {
     height: min(70px, 10vh);
     width: clamp(35px , 10vw, 60px);
     right: clamp(-60px,-9vw,-30px);
-    /* right: -10vw; */
     top: min(calc(-2vh + 3px), -10px);
 }
 .triangle {
@@ -783,7 +770,6 @@ input[type=text]:focus {
 }
 .arrow {
     width: 30px;
-    /* clip-path: polygon(10px at 10px 10px); */
     height: 30px;
     clip-path: polygon(
         50% 3px,
