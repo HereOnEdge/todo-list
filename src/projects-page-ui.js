@@ -231,7 +231,8 @@ function myProjects() {
         projectContainer.appendChild(editSpan);
         ul.appendChild(projectContainer);
         // set each project a name 
-        const spanTitle = document.createElement("span");
+        const spanTitle = document.createElement("a");
+        spanTitle.href = `javascript:setTimeout(()=>{window.location = '#spanTitle${i}' },300)`;
         spanTitle.classList.add("pp-spanTitle");
         spanTitle.id = `spanTitle${i}`;
         project.appendChild(spanTitle);
