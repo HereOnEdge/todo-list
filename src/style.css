@@ -540,7 +540,7 @@ li.nav.open {
     gap: 20px;
     width: 40%;
 }
-.newTask-options div:not(.tags-mainContainer):hover {
+.newTask-options>div:not(.tags-mainContainer):hover {
     background-color: var(--third-color);
     border-radius: 5px;
     scale: 1.5;

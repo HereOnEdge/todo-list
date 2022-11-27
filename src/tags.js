@@ -40,6 +40,10 @@ export const chooseTag = () => {
             setTimeout(() => {
                 tagContainer.style.top = `${topPosition * i}%`;
             }, 100);
+            mainContainer.addEventListener("mouseleave", () => {
+                mainContainer.style.height = "20px";
+                tagContainer.style.top = "0";
+            })
             tagContainer.addEventListener("mouseover", () => {
                 let idArray = tagContainer.id.split("tag-container");
                 const id = idArray[1];
@@ -53,9 +57,9 @@ export const chooseTag = () => {
     })
     mainContainer.addEventListener("mouseleave", () => {
         mainContainer.style.height = "20px";
-        let tagNames = document.querySelectorAll(".tag-name");
-        for(let tagName of tagNames) {
-            // tagName.style.display = "none";
+        let tagContainers = document.querySelectorAll(".tag-container");
+        for(let tagContainer of tagContainers) {
+            tagContainer.style.top = "0";
         }
     })
 }
