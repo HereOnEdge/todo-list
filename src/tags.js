@@ -1,12 +1,17 @@
-const tags = [];
-let tag = (tagName, tagColor) => {
+export const tags = [];
+function __tag(tagName, tagColor) {
     const name = tagName
     const color = tagColor;
     return {name, color};
 }
-tags.push(tag("Work", "red"))
-tags.push(tag("Study", "blue"))
-tags.push(tag("chores", "green"))
+export let creatTag = (tagName,tagColor) => {
+    let newTag = __tag(tagName,tagColor);
+    tags.push(newTag);
+    return newTag;
+}
+creatTag("Work", "red")
+creatTag("Study", "blue")
+creatTag("chores", "green")
 export let tagDom =() => {
     const mainContainer = document.createElement("div");
     mainContainer.classList.add("tags-mainContainer");

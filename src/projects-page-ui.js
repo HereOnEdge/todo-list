@@ -398,6 +398,7 @@ let detailShower = () => {
                     let taskName = '';
                     let taskDate = '';
                     let taskTime = '';
+                    let taskTag = '';
                     let taskImportance = false;
                     // flip the new task's section to ask if the task is important or not
                     let flippingCard = document.querySelector(`#flipping-card${projectObject.id}`);
@@ -460,9 +461,8 @@ let detailShower = () => {
                     })
                     // make a function to add the task and display everything in it's place 
                     function taskHandler() {
-                        let task = projectObject.addTask(taskName, taskDate, taskTime, taskImportance);
+                        projectObject.addTask(taskName, taskDate, taskTime, taskTag, taskImportance);
                         flippingCard.classList.remove("flipped");
-                        projectObject.tasks.push(task);
                         // remove task inputs and put newtask button back in its place
                         newTaskContainer.removeChild(input_btnContainer);
                         newTaskContainer.removeChild(options);
@@ -502,6 +502,7 @@ let detailShower = () => {
                 let tasksToShow = [];
                 const __TaskDisplayer = () => {
                     for (let y = 0; y < tasksToShow.length; y++) {
+                        console.log(tasksToShow)
                         let domTask = document.createElement("li");
                         let taskIsDoneContainer = document.createElement("div");
                         taskIsDoneContainer.classList.add("doneTask-container");
