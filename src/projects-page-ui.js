@@ -9,6 +9,8 @@ import stickyBackgroundUrl from "./img/sticky.jpg";
 import coffeeBackgroundUrl from "./img/coffe.jpg";
 import { startLoading } from "./loading.js";
 import loader from "./loading.js";
+import { tagDom } from "./tags.js";
+import { chooseTag } from "./tags.js";
 
 // display projects on main screen
 export default (function projectsDisplayer() {
@@ -314,6 +316,7 @@ let detailShower = () => {
             dateContainer.appendChild(newTaskDate);
             options.appendChild(timeContainer);
             options.appendChild(dateContainer);
+            options.appendChild(tagDom());
             // create a button that if clicked, new task inputs appear
             function addTaskButton() {
                 let addTask = document.createElement("div");
@@ -344,6 +347,7 @@ let detailShower = () => {
                         timeIcon.innerHTML = '<path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>';
                         timeIcon.innerHTML += '<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>'
                         newTask.focus();
+                        chooseTag();
                     }, 600);
                 })
             }

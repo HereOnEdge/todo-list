@@ -540,10 +540,44 @@ li.nav.open {
     gap: 20px;
     width: 40%;
 }
-.newTask-options div:hover {
+.newTask-options div:not(.tags-mainContainer):hover {
     background-color: var(--third-color);
     border-radius: 5px;
     scale: 1.5;
+}
+.tags-mainContainer {
+    position: relative;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+    aspect-ratio: 1 / 1;
+    margin-right: auto;
+    transition: height 0.3s;
+}
+.tag-container {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    transition: 0.1s;
+}
+.tag {
+    border-radius: 50%;
+    width: 16px;
+    aspect-ratio: 1 /1;
+}
+.tag-name {
+    display: none;
+    min-width: 20px;
+    font-size: 14px;
+    color: var(--primary-text-color);
 }
 .task {
     position: relative;
