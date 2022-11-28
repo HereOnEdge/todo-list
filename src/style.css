@@ -558,6 +558,7 @@ li.nav.open {
     aspect-ratio: 1 / 1;
     margin-right: auto;
     transition: height 0.3s;
+    z-index: 1;
 }
 .tag-container {
     position: absolute;
@@ -565,6 +566,7 @@ li.nav.open {
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
+    gap: 5px;
     top: 0;
     left: 0;
     width: 20px;
@@ -579,14 +581,14 @@ li.nav.open {
 }
 .tag {
     border-radius: 50%;
-    width: 16px;
+    width: 20px;
     aspect-ratio: 1 /1;
     flex: 0 0 auto;
 }
 .tag-name {
     display: none;
     min-width: 20px;
-    font-size: 14px;
+    font-size: 16px;
     color: var(--primary-text-color);
 }
 .task {

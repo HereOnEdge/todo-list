@@ -65,14 +65,10 @@ export let tagHub = () => {
     function showTagOptions(projectID) {
         let mainContainer = document.querySelector(`#tags-mainContainer-${projectID}`);
         mainContainer.addEventListener("mouseover", () => {
-            let height = tags.length * 16;
-            let mainStyle = getComputedStyle(mainContainer);
+            let height = tags.length * 20 + 10;
             mainContainer.style.height = `${height}px`;
-            let topPosition = 100 / tags.length + 10;
+            let topPosition = 100 / tags.length + 5;
             for (let i = 0; i < tags.length; i++) {
-                if(mainStyle.top === `${topPosition * i}%`){
-                    return;
-                }
                 let tagContainer = document.querySelector(`#tag-container-${i}-project-${projectID}`);
                 setTimeout(() => {
                     tagContainer.style.top = `${topPosition * i}%`;
@@ -85,7 +81,7 @@ export let tagHub = () => {
                     let tagNameStyles = getComputedStyle(tagName);
                     tagName.style.color = tags[id].color;
                     let width = tagNameStyles.width.split("px");
-                    tagContainer.style.width = `${+width[0] + 40}px`;
+                    tagContainer.style.width = `${+width[0] + 60}px`;
                     tagName.style.display = "inline-block";
                     // go back to normal when mouse in not hovering the tag 
                     tagContainer.addEventListener("mouseleave", () => {
@@ -95,17 +91,14 @@ export let tagHub = () => {
                 })
     
             }
-            mainContainer.addEventListener("mouseleave", () => {
-                mainContainer.style.height = "20px";
-                if(mainStyle.height === "20px"){
-                    return;
-                }
-                for (let i = 0; i < tags.length; i++) {
-                    let tagContainer = document.querySelector(`#tag-container-${i}-project-${projectID}`);
-                    console.log("position restored");
-                    tagContainer.style.top = "0";
-                }
-            })
+        })
+        mainContainer.addEventListener("mouseleave", () => {
+            mainContainer.style.height = "20px";
+            for (let i = 0; i < tags.length; i++) {
+                let tagContainer = document.querySelector(`#tag-container-${i}-project-${projectID}`);
+                console.log("position restored");
+                tagContainer.style.top = "0";
+            }
         })
     };
     return {showTag,addFullContainer, showTagOptions}
