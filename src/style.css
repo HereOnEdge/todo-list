@@ -398,7 +398,6 @@ li.nav.open {
     align-items: center;
     gap: min(10px , 5%);
     margin-left: -10px;
-    border: solid red;
 }
 .addTask-button ,.sort-button{
     display: flex;
@@ -541,7 +540,6 @@ li.nav.open {
     justify-content: flex-start;
     gap: 20px;
     width: 40%;
-    border: 1px solid green;
 }
 .newTask-options>div:not(.tags-mainContainer):hover {
     background-color: var(--third-color);
@@ -560,7 +558,6 @@ li.nav.open {
     aspect-ratio: 1 / 1;
     margin-right: auto;
     transition: height 0.3s;
-    /* background-color: rgba(20,20,20,0.3); */
 }
 .tag-container {
     position: absolute;
@@ -569,20 +566,22 @@ li.nav.open {
     justify-content: flex-start;
     align-items: center;
     top: 0;
+    left: 0;
     width: 20px;
     height: 20px;
     transition: 0.1s;
     transition: width 0.5s;
     overflow: hidden;
+    flex: 1 0 auto;
 }
 .tag-container:hover {
-    background-color: rgba(220,220,220,0.8);
+    background-color: rgba(20,20,20,0.3);
 }
 .tag {
     border-radius: 50%;
     width: 16px;
     aspect-ratio: 1 /1;
-    z-index: 1;
+    flex: 0 0 auto;
 }
 .tag-name {
     display: none;

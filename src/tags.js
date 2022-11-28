@@ -1,78 +1,112 @@
-import { tagsMainContainer } from "./projects-page-ui";
 
 export const tags = [];
 function __tag(tagName, tagColor) {
     const name = tagName
     const color = tagColor;
-    return {name, color};
+    return { name, color };
 }
-export let creatTag = (tagName,tagColor) => {
-    let newTag = __tag(tagName,tagColor);
+export let creatTag = (tagName, tagColor) => {
+    let newTag = __tag(tagName, tagColor);
     tags.push(newTag);
     return newTag;
 }
 creatTag("Work", "red")
 creatTag("Study", "blue")
 creatTag("chores", "green")
-export let tagDom =() => {
-    const mainContainer = document.createElement("div");
-    mainContainer.classList.add("tags-mainContainer");
-    for(let i =0; i < tags.length;i++){
-        const tagContainer = document.createElement("div");
-        tagContainer.classList.add("tag-container")
-        tagContainer.id = `tag-container-${i}`;
-        const tag = document.createElement("span");
-        tag.classList.add("tag");
-        tag.id = `tag${i}`;
-        tag.style.backgroundColor = tags[i].color;
-        tagContainer.appendChild(tag);
-        const tagName = document.createElement("span");
-        tagName.classList.add("tag-name");
-        tagName.id = `tag-name${i}`;
-        tagName.textContent = tags[i].name;
-        tagContainer.appendChild(tagName);
-        mainContainer.appendChild(tagContainer);
+export let tagHub = () => {
+    // make a Node for a specific Tag
+    const showTag = (tagName, projectID, haveHover)=> {
+        for (let i = 0; tags.length; i++) {
+            if (tags[i].name === tagName) {
+                const tag = document.createElement("span");
+                tag.classList.add("tag");
+                tag.id = `tag-${i}-project-${projectID}`;
+                tag.style.backgroundColor = tags[i].color;
+                if (haveHover === true) {
+                    __enableHover(tag, tagName);
+                }
+                return tag;
+            }
+        }
+    };
+    const addFullContainer = (projectID) => {
+        const mainContainer = document.createElement("div");
+        mainContainer.classList.add("tags-mainContainer");
+        mainContainer.id = `tags-mainContainer-${projectID}`;
+        for (let i = 0; i < tags.length; i++) {
+            let tag = showTag(tags[i].name, projectID, false);
+            const tagContainer = document.createElement("div");
+            tagContainer.classList.add("tag-container")
+            tagContainer.id = `tag-container-${i}-project-${projectID}`;
+            tagContainer.appendChild(tag);
+            const tagName = document.createElement("span");
+            tagName.classList.add("tag-name");
+            tagName.id = `tagName-${i}-project${projectID}`;
+            tagName.textContent = tags[i].name;
+            tagContainer.appendChild(tagName);
+            mainContainer.appendChild(tagContainer);
+        }
+        return mainContainer;
     }
-    return mainContainer;
-}
-
-export const chooseTag = () => {
-    let mainContainer = tagsMainContainer;
-    let tagConts = document.querySelectorAll(".tag-container");
-    mainContainer.addEventListener("mouseover", () => {
-        let height = tags.length * 16;
-        mainContainer.style.height = `${height}px`;
-        // mainContainer.style.top = "50%";
-        let topPosition = 100 / tags.length;
-        for (let i = 0; i < tags.length; i++){
-            let tagContainer = document.querySelector(`#tag-container-${i}`);
-            setTimeout(() => {
-                tagContainer.style.top = `${topPosition * i}%`;
-            }, 100);
+    // make a specific Tag to show it's name when it's hovered
+    function __enableHover(Node, tagName) {
+        let tag = Node;
+        tag.addEventListener("mouseover", () => {
+            tag.width = "60px";
+            tag.textContent = tagName;
+        });
+        tag.addEventListener("mouseleave", () => {
+            tag.width = "20px";
+            tag.textContent = "";
+        })
+    };
+    
+    // make a function to show all the tags that you can pick from
+    function showTagOptions(projectID) {
+        let mainContainer = document.querySelector(`#tags-mainContainer-${projectID}`);
+        mainContainer.addEventListener("mouseover", () => {
+            let height = tags.length * 16;
+            let mainStyle = getComputedStyle(mainContainer);
+            mainContainer.style.height = `${height}px`;
+            let topPosition = 100 / tags.length + 10;
+            for (let i = 0; i < tags.length; i++) {
+                if(mainStyle.top === `${topPosition * i}%`){
+                    return;
+                }
+                let tagContainer = document.querySelector(`#tag-container-${i}-project-${projectID}`);
+                setTimeout(() => {
+                    tagContainer.style.top = `${topPosition * i}%`;
+                    console.log("changed position")
+                }, 100);
+                tagContainer.addEventListener("mouseover", () => {
+                    let idArray = tagContainer.id.split("-");
+                    const id = idArray[2];
+                    let tagName = document.querySelector(`#tagName-${id}-project${projectID}`);
+                    let tagNameStyles = getComputedStyle(tagName);
+                    tagName.style.color = tags[id].color;
+                    let width = tagNameStyles.width.split("px");
+                    tagContainer.style.width = `${+width[0] + 40}px`;
+                    tagName.style.display = "inline-block";
+                    // go back to normal when mouse in not hovering the tag 
+                    tagContainer.addEventListener("mouseleave", () => {
+                        tagName.style.display = "none";
+                        tagContainer.style.width = "20px";
+                    })
+                })
+    
+            }
             mainContainer.addEventListener("mouseleave", () => {
                 mainContainer.style.height = "20px";
-                // for(let tagCont of tagConts){
-                //     tagCont.style.top = "0";
-                // }
+                if(mainStyle.height === "20px"){
+                    return;
+                }
+                for (let i = 0; i < tags.length; i++) {
+                    let tagContainer = document.querySelector(`#tag-container-${i}-project-${projectID}`);
+                    console.log("position restored");
+                    tagContainer.style.top = "0";
+                }
             })
-            tagContainer.addEventListener("mouseover", () => {
-                let idArray = tagContainer.id.split("-");
-                const id = idArray[2];
-                const tagName = document.querySelector(`#tag-name${id}`);
-                tagContainer.style.width = "100%";
-                tagName.style.display = 'inline-block';
-                tagContainer.addEventListener("mouseleave", () => {
-                    tagName.style.display = "none";
-                    tagContainer.style.width = "20px"
-                })
-            })
-        }
-    })
-    mainContainer.addEventListener("mouseleave", () => {
-        mainContainer.style.height = "20px";
-        let tagContainers = document.querySelectorAll(".tag-container");
-        for(let tagContainer of tagContainers) {
-            tagContainer.style.top = "0";
-        }
-    })
+        })
+    };
+    return {showTag,addFullContainer, showTagOptions}
 }
