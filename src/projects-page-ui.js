@@ -250,6 +250,7 @@ function myProjects() {
     editDots();
 }
 // open each project info on click
+export let tagsMainContainer;
 let detailShower = () => {
     let projects = document.querySelectorAll(".project");
     let i = 0;
@@ -316,7 +317,11 @@ let detailShower = () => {
             dateContainer.appendChild(newTaskDate);
             options.appendChild(timeContainer);
             options.appendChild(dateContainer);
-            options.appendChild(tagDom());
+            // make tags 
+            let mainContainer = tagDom()
+            mainContainer.id = `tags-mainContainer-${projectObject.id}`;
+            tagsMainContainer = mainContainer;
+            options.appendChild(mainContainer);
             // create a button that if clicked, new task inputs appear
             function addTaskButton() {
                 let addTask = document.createElement("div");

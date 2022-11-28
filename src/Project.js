@@ -13,7 +13,7 @@ export default function Project(projectName ,projectID, projectDescription){
     const tasks = [];
     const complete = false;
 
-    return {name , description , tag, tasks, complete, addTask, id}
+    return {name , description , tasks, complete, addTask, id}
 }
 // make a list to store each project in it
 export const projectArray = []

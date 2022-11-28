@@ -398,6 +398,7 @@ li.nav.open {
     align-items: center;
     gap: min(10px , 5%);
     margin-left: -10px;
+    border: solid red;
 }
 .addTask-button ,.sort-button{
     display: flex;
@@ -533,12 +534,14 @@ li.nav.open {
     opacity: 0.7;
 }
 .newTask-options {
+    position: relative;
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
     justify-content: flex-start;
     gap: 20px;
     width: 40%;
+    border: 1px solid green;
 }
 .newTask-options>div:not(.tags-mainContainer):hover {
     background-color: var(--third-color);
@@ -546,32 +549,40 @@ li.nav.open {
     scale: 1.5;
 }
 .tags-mainContainer {
-    position: relative;
+    position: absolute;
+    left: 0;
+    top: 0;
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     height: 20px;
     aspect-ratio: 1 / 1;
     margin-right: auto;
     transition: height 0.3s;
+    /* background-color: rgba(20,20,20,0.3); */
 }
 .tag-container {
     position: absolute;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     top: 0;
-    left: 0;
-    width: 100%;
+    width: 20px;
     height: 20px;
     transition: 0.1s;
+    transition: width 0.5s;
+    overflow: hidden;
+}
+.tag-container:hover {
+    background-color: rgba(220,220,220,0.8);
 }
 .tag {
     border-radius: 50%;
     width: 16px;
     aspect-ratio: 1 /1;
+    z-index: 1;
 }
 .tag-name {
     display: none;
@@ -597,6 +608,7 @@ li.nav.open {
     box-sizing: border-box;
     transition: 0.2s ; 
     overflow: hidden;
+    z-index: -1;
     /* box-shadow: 1px 1px 6px var(--secondary-color); */
 }
 .doneTask-container {

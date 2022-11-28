@@ -1,3 +1,5 @@
+import { tagsMainContainer } from "./projects-page-ui";
+
 export const tags = [];
 function __tag(tagName, tagColor) {
     const name = tagName
@@ -18,7 +20,7 @@ export let tagDom =() => {
     for(let i =0; i < tags.length;i++){
         const tagContainer = document.createElement("div");
         tagContainer.classList.add("tag-container")
-        tagContainer.id = `tag-container${i}`;
+        tagContainer.id = `tag-container-${i}`;
         const tag = document.createElement("span");
         tag.classList.add("tag");
         tag.id = `tag${i}`;
@@ -35,27 +37,33 @@ export let tagDom =() => {
 }
 
 export const chooseTag = () => {
-    let mainContainer = document.querySelector(".tags-mainContainer");
+    let mainContainer = tagsMainContainer;
+    let tagConts = document.querySelectorAll(".tag-container");
     mainContainer.addEventListener("mouseover", () => {
         let height = tags.length * 16;
         mainContainer.style.height = `${height}px`;
+        // mainContainer.style.top = "50%";
         let topPosition = 100 / tags.length;
         for (let i = 0; i < tags.length; i++){
-            let tagContainer = document.querySelector(`#tag-container${i}`);
+            let tagContainer = document.querySelector(`#tag-container-${i}`);
             setTimeout(() => {
                 tagContainer.style.top = `${topPosition * i}%`;
             }, 100);
             mainContainer.addEventListener("mouseleave", () => {
                 mainContainer.style.height = "20px";
-                tagContainer.style.top = "0";
+                // for(let tagCont of tagConts){
+                //     tagCont.style.top = "0";
+                // }
             })
             tagContainer.addEventListener("mouseover", () => {
-                let idArray = tagContainer.id.split("tag-container");
-                const id = idArray[1];
+                let idArray = tagContainer.id.split("-");
+                const id = idArray[2];
                 const tagName = document.querySelector(`#tag-name${id}`);
+                tagContainer.style.width = "100%";
                 tagName.style.display = 'inline-block';
                 tagContainer.addEventListener("mouseleave", () => {
                     tagName.style.display = "none";
+                    tagContainer.style.width = "20px"
                 })
             })
         }
