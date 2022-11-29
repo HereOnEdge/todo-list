@@ -18,8 +18,8 @@ export default function Project(projectName ,projectID, projectDescription){
 // make a list to store each project in it
 export const projectArray = []
 const project1 = Project("todo-list", 0, "make a web application for managing your todo's and projects","Work");
-project1.addTask("new",'',true);
-project1.addTask("a serious task", '', '',false)
+project1.addTask("new",'','','Study',true);
+project1.addTask("a serious task", '', '','Work',false)
 const project2 = Project("Advanced JavaScript", 1, "Read all the Advanced topics in Odin Project", "educate");
-project2.addTask("real task", '','',true)
+project2.addTask("real task", '','','Work',true)
 projectArray.push(project1,project2);

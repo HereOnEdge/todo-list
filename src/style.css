@@ -554,7 +554,7 @@ li.nav.open {
     flex-flow: column nowrap;
     justify-content: center;
     align-items: flex-start;
-    height: 20px;
+    height: 40px;
     aspect-ratio: 1 / 1;
     margin-right: auto;
     transition: height 0.3s;
@@ -575,6 +575,13 @@ li.nav.open {
     transition: width 0.5s;
     overflow: hidden;
     flex: 1 0 auto;
+    border-radius: 20px;
+}
+.tag-container.active, .tag-container.active:hover {
+    background-color:rgba(200,200,200,0.8);
+}
+.tick {
+    border-color: var(--secondary-color);
 }
 .tag-container:hover {
     background-color: rgba(20,20,20,0.3);
@@ -582,8 +589,14 @@ li.nav.open {
 .tag {
     border-radius: 50%;
     width: 20px;
-    aspect-ratio: 1 /1;
+    height: 20px;
     flex: 0 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    transition: 0.3s;
+    overflow: hidden;
 }
 .tag-name {
     display: none;
@@ -645,6 +658,11 @@ li.nav.open {
 .task-date {
     /* background-color: #d6a1ff; */
     border-radius: 100px;
+}
+.task-tag {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .task.important::after {
     content: '';

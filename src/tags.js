@@ -13,9 +13,11 @@ export let creatTag = (tagName, tagColor) => {
 creatTag("Work", "red")
 creatTag("Study", "blue")
 creatTag("chores", "green")
+export let choosedTag;
+
 export let tagHub = () => {
     // make a Node for a specific Tag
-    const showTag = (tagName, projectID, haveHover)=> {
+    const showTag = (tagName, projectID, haveHover) => {
         for (let i = 0; tags.length; i++) {
             if (tags[i].name === tagName) {
                 const tag = document.createElement("span");
@@ -29,10 +31,11 @@ export let tagHub = () => {
             }
         }
     };
-    const addFullContainer = (projectID) => {
+    const addFullContainer = (projectID, parentNode) => {
         const mainContainer = document.createElement("div");
         mainContainer.classList.add("tags-mainContainer");
         mainContainer.id = `tags-mainContainer-${projectID}`;
+        parentNode.appendChild(mainContainer);
         for (let i = 0; i < tags.length; i++) {
             let tag = showTag(tags[i].name, projectID, false);
             const tagContainer = document.createElement("div");
@@ -45,34 +48,40 @@ export let tagHub = () => {
             tagName.textContent = tags[i].name;
             tagContainer.appendChild(tagName);
             mainContainer.appendChild(tagContainer);
+            tagContainer.addEventListener("click", () => {
+                choosedTag = __chooseTag(i, projectID);
+                let choosedTagName = choosedTag.active;
+                choosedTag = choosedTagName;
+            })
         }
-        return mainContainer;
+        return { mainContainer};
     }
     // make a specific Tag to show it's name when it's hovered
     function __enableHover(Node, tagName) {
         let tag = Node;
         tag.addEventListener("mouseover", () => {
-            tag.width = "60px";
+            tag.style.width = "60px";
+            tag.style.borderRadius = "20px"
             tag.textContent = tagName;
         });
         tag.addEventListener("mouseleave", () => {
-            tag.width = "20px";
+            tag.style.width = "20px";
+            tag.style.borderRadius = "50%"
             tag.textContent = "";
         })
     };
-    
+
     // make a function to show all the tags that you can pick from
     function showTagOptions(projectID) {
         let mainContainer = document.querySelector(`#tags-mainContainer-${projectID}`);
         mainContainer.addEventListener("mouseover", () => {
             let height = tags.length * 20 + 10;
             mainContainer.style.height = `${height}px`;
-            let topPosition = 100 / tags.length + 5;
+            let topPosition = 100 / tags.length;
             for (let i = 0; i < tags.length; i++) {
                 let tagContainer = document.querySelector(`#tag-container-${i}-project-${projectID}`);
                 setTimeout(() => {
                     tagContainer.style.top = `${topPosition * i}%`;
-                    console.log("changed position")
                 }, 100);
                 tagContainer.addEventListener("mouseover", () => {
                     let idArray = tagContainer.id.split("-");
@@ -89,17 +98,36 @@ export let tagHub = () => {
                         tagContainer.style.width = "20px";
                     })
                 })
-    
+
             }
         })
         mainContainer.addEventListener("mouseleave", () => {
             mainContainer.style.height = "20px";
             for (let i = 0; i < tags.length; i++) {
                 let tagContainer = document.querySelector(`#tag-container-${i}-project-${projectID}`);
-                console.log("position restored");
                 tagContainer.style.top = "0";
             }
         })
     };
-    return {showTag,addFullContainer, showTagOptions}
+    return { showTag, addFullContainer, showTagOptions }
+}
+// make tags clickable so that on click they be the Tassk's Tag.
+function __chooseTag(index, projectID) {
+    let tagContainer = document.querySelector(`#tag-container-${index}-project-${projectID}`);
+    const tag = document.querySelector(`#tag-${index}-project-${projectID}`);
+    const tagObject = tags[index];
+    tagContainer.classList.toggle('active');
+    if (tagContainer.classList.contains("active")) {
+        // add a tick inside tag
+        let tick = document.createElement("div");
+        tick.classList.add("yes");
+        tick.classList.add("tick");
+        tag.appendChild(tick)
+        tag.style.zIndex = "1";
+        return { active: tagObject.name };
+    } else {
+        tag.style.zIndex = "-1";
+        tag.removeChild(tag.firstChild);
+        return { active: '' };
+    }
 }

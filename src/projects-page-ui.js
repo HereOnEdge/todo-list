@@ -10,6 +10,7 @@ import coffeeBackgroundUrl from "./img/coffe.jpg";
 import { startLoading } from "./loading.js";
 import loader from "./loading.js";
 import { tagHub } from "./tags.js";
+import { choosedTag } from "./tags.js";
 
 // display projects on main screen
 export default (function projectsDisplayer() {
@@ -310,14 +311,14 @@ let detailShower = () => {
             let newTaskTime = document.createElement("input");
             newTaskTime.type = "time";
             newTaskTime.id = "newTaskTime-input";
-            newTaskTime.tabIndex = "-1"; 
+            newTaskTime.tabIndex = "-1";
             timeContainer.appendChild(newTaskTime);
             dateContainer.appendChild(newTaskDate);
             options.appendChild(timeContainer);
             options.appendChild(dateContainer);
-            // make tags 
-            let mainContainer = tagHub();
-            options.appendChild(mainContainer.addFullContainer(projectObject.id));
+            // declare a varibale to save Choosed Tag later on it
+            // let tagValue;
+            // let showTags;
             // create a button that if clicked, new task inputs appear
             function addTaskButton() {
                 let addTask = document.createElement("div");
@@ -341,6 +342,11 @@ let detailShower = () => {
                         sortButton.remove();
                         newTaskContainer.appendChild(input_btnContainer);
                         newTaskContainer.appendChild(options)
+                        // make tags and append it in Options Section
+                        let tagsMainContainer = tagHub();
+                        tagsMainContainer.addFullContainer(projectObject.id, options);
+                        // save Choosed Tag inside a variable
+                        
                         let dateIcon = document.querySelector(`.datepicker${projectObject.id}`);
                         dateIcon.innerHTML = '<path d="M4.684 11.523v-2.3h2.261v-.61H4.684V6.801h2.464v-.61H4v5.332h.684zm3.296 0h.676V8.98c0-.554.227-1.007.953-1.007.125 0 .258.004.329.015v-.613a1.806 1.806 0 0 0-.254-.02c-.582 0-.891.32-1.012.567h-.02v-.504H7.98v4.105zm2.805-5.093c0 .238.192.425.43.425a.428.428 0 1 0 0-.855.426.426 0 0 0-.43.43zm.094 5.093h.672V7.418h-.672v4.105z"/>'
                         dateIcon.innerHTML += '<path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>';
@@ -350,7 +356,7 @@ let detailShower = () => {
                         newTask.focus();
                         // chooseTag();
                         // show tag options on hover
-                        mainContainer.showTagOptions(projectObject.id);
+                        tagsMainContainer.showTagOptions(projectObject.id);
                     }, 600);
                 })
             }
@@ -372,7 +378,7 @@ let detailShower = () => {
                     })
                 } else {
                     let sortButton = null;
-                    if(document.querySelector(`#sort${projectObject.id}`)) {
+                    if (document.querySelector(`#sort${projectObject.id}`)) {
                         sortButton = document.querySelector(`#sort${projectObject.id}`);
                     } else {
                         sortButton = document.createElement("div");
@@ -442,6 +448,7 @@ let detailShower = () => {
                         taskName = newTask.value;
                         taskDate = newTaskDate.value;
                         taskTime = newTaskTime.value;
+                        taskTag = choosedTag;
                         taskHandler();
                     });
                     noButton.addEventListener("click", () => {
@@ -449,6 +456,7 @@ let detailShower = () => {
                         taskName = newTask.value;
                         taskDate = newTaskDate.value;
                         taskTime = newTaskTime.value;
+                        taskTag = choosedTag;
                         taskHandler();
                     })
                     // click yes or no buttons using enter key on keyboard
@@ -468,10 +476,14 @@ let detailShower = () => {
                         flippingCard.classList.remove("flipped");
                         // remove task inputs and put newtask button back in its place
                         newTaskContainer.removeChild(input_btnContainer);
+                        options.removeChild(options.lastChild);
                         newTaskContainer.removeChild(options);
+                        // let tagsMainContainer = document.querySelector('.tags-mainContainer');
+                        // tagsMainContainer.remove();
                         newTask.value = "";
                         newTaskDate.value = "";
                         newTaskTime.value = "";
+                        taskTag = "";
                         sortImportant();
                         addTaskButton();
                         display.none();
@@ -503,6 +515,8 @@ let detailShower = () => {
             // add project's tasks to it
             function displayTasks() {
                 let tasksToShow = [];
+                // coby tagHub into a new object
+                let tagsCenter = tagHub();
                 const __TaskDisplayer = () => {
                     for (let y = 0; y < tasksToShow.length; y++) {
                         console.log(tasksToShow)
@@ -523,6 +537,8 @@ let detailShower = () => {
                         domTask.appendChild(taskDate);
                         let taskTags = document.createElement("div");
                         taskTags.classList.add("task-tags");
+                        let tag = tagsCenter.showTag(tasksToShow[y].tag(), projectObject.id, true)
+                        taskTags.appendChild(tag);
                         domTask.appendChild(taskTags);
                         domTask.classList.add("task");
                         domTask.id = `task${projectObject.id}`
@@ -533,7 +549,7 @@ let detailShower = () => {
                     }
                     let combinedHeight = 0;
                     let taskNodes = document.querySelectorAll(`#task${id}`);
-                    for(let node of taskNodes) {
+                    for (let node of taskNodes) {
                         let style = getComputedStyle(node)
                         let height = style.height;
                         let splitted = height.split("px")
@@ -544,7 +560,7 @@ let detailShower = () => {
                     taskCounter.textContent = tasksToShow.length;
                 }
                 const none = () => {
-                    let oldTasks = document.querySelectorAll(`#task${projectObject.id}`); 
+                    let oldTasks = document.querySelectorAll(`#task${projectObject.id}`);
                     for (let oldTask of oldTasks) {
                         tasksToShow.pop();
                         oldTask.remove();
