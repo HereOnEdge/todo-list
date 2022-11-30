@@ -477,6 +477,9 @@ li.nav.open {
     border-radius: 50%;
     box-sizing: border-box;
 }
+.yes-button:active, .no-button:active {
+    background-color: var(--secondary-color);
+}
 .yes-button {
     border: 1px solid var(--complete-sign-color);
 }
@@ -500,10 +503,6 @@ li.nav.open {
     font-weight: 900;
     height: 5px;
     width: 15px;
-}
-.yes:active, .no:active {
-    background-color: var(--forth-color);
-    border-radius: 50%;
 }
 .input-btn-container {
     width: 50%;

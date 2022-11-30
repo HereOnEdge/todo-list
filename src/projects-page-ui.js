@@ -519,7 +519,6 @@ let detailShower = () => {
                 let tagsCenter = tagHub();
                 const __TaskDisplayer = () => {
                     for (let y = 0; y < tasksToShow.length; y++) {
-                        console.log(tasksToShow)
                         let domTask = document.createElement("li");
                         let taskIsDoneContainer = document.createElement("div");
                         taskIsDoneContainer.classList.add("doneTask-container");

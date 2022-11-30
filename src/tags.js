@@ -54,12 +54,12 @@ export let tagHub = () => {
                 choosedTag = choosedTagName;
             })
         }
-        return { mainContainer};
+        return { mainContainer };
     }
     // make a specific Tag to show it's name when it's hovered
     function __enableHover(Node, tagName) {
         let tag = Node;
-        tag.addEventListener("mouseover", () => {
+        tag.addEventListener("mouseenter", () => {
             tag.style.width = "60px";
             tag.style.borderRadius = "20px"
             tag.textContent = tagName;
@@ -74,7 +74,7 @@ export let tagHub = () => {
     // make a function to show all the tags that you can pick from
     function showTagOptions(projectID) {
         let mainContainer = document.querySelector(`#tags-mainContainer-${projectID}`);
-        mainContainer.addEventListener("mouseover", () => {
+        mainContainer.addEventListener("mouseenter", () => {
             let height = tags.length * 20 + 10;
             mainContainer.style.height = `${height}px`;
             let topPosition = 100 / tags.length;
@@ -83,7 +83,7 @@ export let tagHub = () => {
                 setTimeout(() => {
                     tagContainer.style.top = `${topPosition * i}%`;
                 }, 100);
-                tagContainer.addEventListener("mouseover", () => {
+                tagContainer.addEventListener("mouseenter", () => {
                     let idArray = tagContainer.id.split("-");
                     const id = idArray[2];
                     let tagName = document.querySelector(`#tagName-${id}-project${projectID}`);
@@ -93,12 +93,12 @@ export let tagHub = () => {
                     tagContainer.style.width = `${+width[0] + 60}px`;
                     tagName.style.display = "inline-block";
                     // go back to normal when mouse in not hovering the tag 
-                    tagContainer.addEventListener("mouseleave", () => {
+                    tagContainer.addEventListener("mouseleave", (tagEvent) => {
                         tagName.style.display = "none";
                         tagContainer.style.width = "20px";
+                        console.log("i triggered")
                     })
                 })
-
             }
         })
         mainContainer.addEventListener("mouseleave", () => {
