@@ -570,7 +570,7 @@ li.nav.open {
     left: 0;
     width: 20px;
     height: 20px;
-    transition: 0.1s;
+    transition: 0.3s;
     transition: width 0.5s;
     overflow: hidden;
     flex: 1 0 auto;
@@ -596,6 +596,9 @@ li.nav.open {
     font-size: 13px;
     transition: 0.3s;
     overflow: hidden;
+}
+#tag-0-project-0 {
+    z-index: 1;
 }
 .tag-name {
     display: none;

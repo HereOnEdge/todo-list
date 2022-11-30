@@ -79,15 +79,16 @@ export let tagHub = () => {
     // make a function to show all the tags that you can pick from
     function showTagOptions(projectID) {
         let mainContainer = document.querySelector(`#tags-mainContainer-${projectID}`);
-            let height = tags.length * 20 + 10;
-            mainContainer.style.height = `${height}px`;
-            let topPosition = 100 / tags.length;
-            for (let i = 0; i < tags.length; i++) {
-                let tagContainer = document.querySelector(`#tag-container-${i}-project-${projectID}`);
+        let height = tags.length * 20 + 10;
+        mainContainer.style.height = `${height}px`;
+        let topPosition = 100 / tags.length;
+        for (let i = 0; i < tags.length; i++) {
+            let tagContainer = document.querySelector(`#tag-container-${i}-project-${projectID}`);
+            setTimeout(() => {
+                tagContainer.style.top = `${topPosition * i}%`;
+            }, 200);
+            tagContainer.addEventListener("mouseenter", () => {
                 setTimeout(() => {
-                    tagContainer.style.top = `${topPosition * i}%`;
-                }, 100);
-                tagContainer.addEventListener("mouseenter", () => {
                     let idArray = tagContainer.id.split("-");
                     const id = idArray[2];
                     let tagName = document.querySelector(`#tagName-${id}-project${projectID}`);
@@ -96,22 +97,26 @@ export let tagHub = () => {
                     let width = tagNameStyles.width.split("px");
                     tagContainer.style.width = `${+width[0] + 60}px`;
                     tagName.style.display = "inline-block";
-                    // go back to normal when mouse in not hovering the tag 
-                })
-                tagContainer.addEventListener("mouseleave", (tagEvent) => {
+                }, 100);
+            })
+            // go back to normal when mouse in not hovering the tag 
+            tagContainer.addEventListener("mouseleave", (tagEvent) => {
+                tagContainer.style.width = "20px";
+                setTimeout(() => {
                     let idArray = tagContainer.id.split("-");
                     const id = idArray[2];
                     let tagName = document.querySelector(`#tagName-${id}-project${projectID}`);
                     tagName.style.display = "none";
-                    tagContainer.style.width = "20px";
-                    console.log("i triggered")
-                })
-            }
+                }, 500);
+            })
+        }
         mainContainer.addEventListener("mouseleave", (event) => {
             mainContainer.style.height = "20px";
             for (let i = 0; i < tags.length; i++) {
-                let tagContainer = document.querySelector(`#tag-container-${i}-project-${projectID}`);
-                tagContainer.style.top = "0";
+                setTimeout(() => {
+                    let tagContainer = document.querySelector(`#tag-container-${i}-project-${projectID}`);
+                    tagContainer.style.top = "0";
+                }, 200)
             }
         })
     };
