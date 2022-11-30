@@ -11,6 +11,7 @@ import { startLoading } from "./loading.js";
 import loader from "./loading.js";
 import { tagHub } from "./tags.js";
 import { choosedTag } from "./tags.js";
+import { CompleteTask } from "./completeTask.js";
 
 // display projects on main screen
 export default (function projectsDisplayer() {
@@ -249,6 +250,10 @@ function myProjects() {
     detailShower();
     editDots();
 }
+// make some variables to export some functions from detailShower
+export let importantButton;
+export let displayObject;
+
 // open each project info on click
 let detailShower = () => {
     let projects = document.querySelectorAll(".project");
@@ -393,6 +398,7 @@ let detailShower = () => {
                     })
                 }
             }
+            importantButton = sortImportant;
             // set a listener on task adder button 
             (function taskAdder() {
                 btn.addEventListener("click", () => {
@@ -514,6 +520,7 @@ let detailShower = () => {
                 // coby tagHub into a new object
                 let tagsCenter = tagHub();
                 const __TaskDisplayer = () => {
+                    // create Nodes for each Task's parts(Task's completion, Name, time, tags) 
                     for (let y = 0; y < tasksToShow.length; y++) {
                         let domTask = document.createElement("li");
                         let taskIsDoneContainer = document.createElement("div");
@@ -541,6 +548,8 @@ let detailShower = () => {
                             domTask.classList.add("important");
                         };
                         tasksContainer.appendChild(domTask);
+                        // check if user clicked on complete button, task removes from DOM Tree
+                        CompleteTask(taskIsDoneContainer, tasksToShow[y])
                     }
                     let combinedHeight = 0;
                     let taskNodes = document.querySelectorAll(`#task${id}`);
@@ -557,20 +566,29 @@ let detailShower = () => {
                 const none = () => {
                     let oldTasks = document.querySelectorAll(`#task${projectObject.id}`);
                     for (let oldTask of oldTasks) {
+                        console.log(oldTask)
                         tasksToShow.pop();
                         oldTask.remove();
                     }
                 }
                 const all = () => {
                     for (let y = 0; y < tasks.length; y++) {
-                        tasksToShow.push(tasks[y])
+                        // first check if task is not complete
+                        if (tasks[y].isComplete === false) {
+                            tasksToShow.push(tasks[y])
+                        }
                     };
                     __TaskDisplayer();
                 };
                 const important = () => {
                     for (let y = 0; y < tasks.length; y++) {
-                        if (tasks[y].important) {
-                            tasksToShow.push(tasks[y])
+                        // first check if task is not complete
+                        if (tasks[y].isComplete === false) {
+                            // then check if it's importANT
+                            if (tasks[y].important) {
+                                // AND ADD IT TO ARRAY
+                                tasksToShow.push(tasks[y])
+                            }
                         }
                     }
                     __TaskDisplayer();
@@ -579,16 +597,8 @@ let detailShower = () => {
             };
             let display = displayTasks();
             display.all();
-
-            // check for important tasks and give them priority and design
-            function importance() {
-                let importantOnes = [];
-                for (let i = 0; i < projectObject.tasks; i++) {
-                    if (projectObject.tasks[i].important === true) {
-                        importantOnes.push(projectObject.tasks[i]);
-                    }
-                }
-            }
+            // store display inside a global varibale so we can export it
+            displayObject = display
         })
     }
 }

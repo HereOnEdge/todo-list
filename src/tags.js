@@ -10,9 +10,9 @@ export let creatTag = (tagName, tagColor) => {
     tags.push(newTag);
     return newTag;
 }
-creatTag("Work", "red")
-creatTag("Study", "blue")
-creatTag("chores", "green")
+creatTag("Work", "green")
+creatTag("Study", "mediumpurple")
+creatTag("chores", "tomato")
 export let choosedTag;
 
 export let tagHub = () => {
@@ -86,7 +86,7 @@ export let tagHub = () => {
             let tagContainer = document.querySelector(`#tag-container-${i}-project-${projectID}`);
             setTimeout(() => {
                 tagContainer.style.top = `${topPosition * i}%`;
-            }, 200);
+            }, 100);
             tagContainer.addEventListener("mouseenter", () => {
                 setTimeout(() => {
                     let idArray = tagContainer.id.split("-");
@@ -97,7 +97,7 @@ export let tagHub = () => {
                     let width = tagNameStyles.width.split("px");
                     tagContainer.style.width = `${+width[0] + 60}px`;
                     tagName.style.display = "inline-block";
-                }, 100);
+                }, 0);
             })
             // go back to normal when mouse in not hovering the tag 
             tagContainer.addEventListener("mouseleave", (tagEvent) => {

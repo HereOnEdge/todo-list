@@ -8,6 +8,8 @@ export default function Project(projectName ,projectID, projectDescription){
     const description = projectDescription;
     const addTask = (taskName, taskDate, taskTime,taskTag, taskImportant) => {
         let newTask = Task(taskName, taskDate, taskTime,taskTag, taskImportant);
+        // add a id to each task
+        newTask["ID"] = tasks.length;
         tasks.push(newTask);
     }
     const tasks = [];

@@ -553,7 +553,7 @@ li.nav.open {
     flex-flow: column nowrap;
     justify-content: center;
     align-items: flex-start;
-    height: 40px;
+    height: 20px;
     aspect-ratio: 1 / 1;
     margin-right: auto;
     transition: height 0.3s;
@@ -634,25 +634,23 @@ li.nav.open {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid var(--forth-color);
+    border: 1px solid var(--primary-color);
     border-radius: 50%;
     cursor: pointer;
-}
-.doneTask-container:active {
-    background-color: var(--complete-sign-color);
-}
-.doneTask-container:active div{
-    border-color: var(--forth-color);
+    box-sizing: border-box;
 }
 .doneMark {
-    display: none;
-    width: 50%;
-    aspect-ratio: 2 / 1;
-    rotate: -45deg;
-    border-width: 0 0 3px 3px;
-    border-color: var(--complete-sign-color);
-    border-style: solid;
-    flex: 0 1 auto;
+    width: 1%;
+    aspect-ratio: 1/ 1;
+    border-radius: 50%;
+    background-color:var(--primary-color);
+    opacity: 0;
+    transition: opacity 0.3ms;
+    transition: width 1000ms;
+}
+.doneTask-container.active .doneMark {
+    width: 100%;
+    opacity: 1;
 }
 .task-name {
     padding-left: 10px;

@@ -15,6 +15,6 @@ export const Task = (taskName, taskDate, taskTime,taskTag, taskImportant) => {
     }
     
     const important = taskImportant;
-    const complete = false;
-    return {name,date,time,tag,important,complete}
+    const isComplete = false;
+    return {name,date,time,tag,important,isComplete}
 }
