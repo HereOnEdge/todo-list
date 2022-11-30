@@ -48,6 +48,11 @@ export let tagHub = () => {
             tagName.textContent = tags[i].name;
             tagContainer.appendChild(tagName);
             mainContainer.appendChild(tagContainer);
+            // make Tags Container hoverable
+            mainContainer.addEventListener("mouseenter", () => {
+                showTagOptions(projectID)
+            })
+            // make a preferred Tag when user clicks on one
             tagContainer.addEventListener("click", () => {
                 choosedTag = __chooseTag(i, projectID);
                 let choosedTagName = choosedTag.active;
@@ -74,7 +79,6 @@ export let tagHub = () => {
     // make a function to show all the tags that you can pick from
     function showTagOptions(projectID) {
         let mainContainer = document.querySelector(`#tags-mainContainer-${projectID}`);
-        mainContainer.addEventListener("mouseenter", () => {
             let height = tags.length * 20 + 10;
             mainContainer.style.height = `${height}px`;
             let topPosition = 100 / tags.length;
@@ -93,15 +97,17 @@ export let tagHub = () => {
                     tagContainer.style.width = `${+width[0] + 60}px`;
                     tagName.style.display = "inline-block";
                     // go back to normal when mouse in not hovering the tag 
-                    tagContainer.addEventListener("mouseleave", (tagEvent) => {
-                        tagName.style.display = "none";
-                        tagContainer.style.width = "20px";
-                        console.log("i triggered")
-                    })
+                })
+                tagContainer.addEventListener("mouseleave", (tagEvent) => {
+                    let idArray = tagContainer.id.split("-");
+                    const id = idArray[2];
+                    let tagName = document.querySelector(`#tagName-${id}-project${projectID}`);
+                    tagName.style.display = "none";
+                    tagContainer.style.width = "20px";
+                    console.log("i triggered")
                 })
             }
-        })
-        mainContainer.addEventListener("mouseleave", () => {
+        mainContainer.addEventListener("mouseleave", (event) => {
             mainContainer.style.height = "20px";
             for (let i = 0; i < tags.length; i++) {
                 let tagContainer = document.querySelector(`#tag-container-${i}-project-${projectID}`);
