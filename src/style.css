@@ -609,7 +609,7 @@ li.nav.open {
 .task {
     position: relative;
     display: grid;
-    grid-template-columns: 5% 40% 20% 10%;
+    grid-template-columns: 5% 40% 30% 10%;
     justify-content: space-around;
     align-items: center;
     color: var(--forth-color);
@@ -667,9 +667,33 @@ li.nav.open {
 .task-name {
     padding-left: 10px;
 }
-.task-date {
-    /* background-color: #d6a1ff; */
-    border-radius: 100px;
+.task-dateTime-container{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 0.8rem;
+
+}
+.task-dateTime-container div {
+    width: 100%;
+    height: 100%;
+    display: none;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    border-width: 0 0 0 0;
+    border-color:var(--primary-color);
+    border-style: solid;
+    box-sizing: border-box;
+}
+.task-icon {
+    color: var(--primary-color);
+}
+.task-date, .task-time {
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 .task-tag {
     display: flex;
