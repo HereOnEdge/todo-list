@@ -640,6 +640,9 @@ li.nav.open {
     box-sizing: border-box;
 }
 .doneMark {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 1%;
     aspect-ratio: 1/ 1;
     border-radius: 50%;
@@ -650,6 +653,15 @@ li.nav.open {
 }
 .doneTask-container.active .doneMark {
     width: 100%;
+    opacity: 1;
+}
+.completeTick {
+    border-color: var(--secondary-color);
+    opacity: 0;
+    transition: opacity 0.1ms;
+    transition: 100ms;
+}
+.completeTick.done {
     opacity: 1;
 }
 .task-name {
