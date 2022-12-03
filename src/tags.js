@@ -136,7 +136,7 @@ function __chooseTag(index, projectID) {
     // if another Tag is already active, unActivate it
     let activeTag = document.querySelector(".active");
     if (activeTag === tagContainer){
-        tag.style.zIndex = "-1";
+        tagContainer.style.zIndex = "-1";
         tag.removeChild(tag.firstChild);
         activeTag.classList.remove("active");
         return { active: '' };
@@ -155,6 +155,6 @@ function __chooseTag(index, projectID) {
         tick.classList.add("yes");
         tick.classList.add("tick");
         tag.appendChild(tick)
-        tag.style.zIndex = "1";
+        tagContainer.style.zIndex = "1";
         return { active: tagObject.name };
     } }

@@ -554,10 +554,13 @@ li.nav.open {
     justify-content: center;
     align-items: flex-start;
     height: 20px;
-    aspect-ratio: 1 / 1;
+    width: 20px;
+    /* aspect-ratio: 1 / 1; */
     margin-right: auto;
     transition: height 0.3s;
     z-index: 1;
+    background-color: rgba(220,220,220,0.8);
+    border-radius: 10px;
 }
 .tag-container {
     position: absolute;
@@ -577,13 +580,13 @@ li.nav.open {
     border-radius: 20px;
 }
 .tag-container.active, .tag-container.active:hover {
-    background-color:rgba(200,200,200,0.8);
+    background-color:rgba(249,249,249,1);
 }
 .tick {
     border-color: var(--secondary-color);
 }
 .tag-container:hover {
-    background-color: rgba(20,20,20,0.3);
+    background-color: rgba(220,220,220,0.9);
 }
 .tag {
     border-radius: 50%;
@@ -606,6 +609,7 @@ li.nav.open {
     min-width: 20px;
     font-size: 16px;
     color: var(--primary-text-color);
+    z-index: 1;
 }
 .task {
     position: relative;
