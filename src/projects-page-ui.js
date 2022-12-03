@@ -266,6 +266,7 @@ let detailShower = () => {
         let tasks = projectObject.tasks;
         i++;
         spanTitle.addEventListener("click", () => {
+            let openProject;
             if (project.classList.contains("open")) {
                 let splitedProject = project.id.split('-');
                 let id = splitedProject[2];
@@ -275,6 +276,19 @@ let detailShower = () => {
                 project.classList.toggle("open")
                 project.style.height = "40px";
                 return;
+            }
+            for(let p of projects){
+                if(p.classList.contains("open")){
+                    openProject = p;
+                }
+            }
+            if(openProject) {
+                let splitedOpenProject = openProject.id.split("-");
+                let id = splitedOpenProject[2];
+                let openProjectNode = document.querySelector(`#project-num-${id}`);
+                openProjectNode.classList.remove("open");
+                document.querySelector(`#tasks-container-${id}`).remove();
+                openProject.style.height = "40px";
             }
             project.classList.toggle("open");
             project.style.height = `${100 + tasks.length * 50}px`;
