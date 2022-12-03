@@ -697,8 +697,11 @@ li.nav.open {
     justify-content: center;
     width: 100%;
 }
-.task-tag {
+.task-tags {
+    height: 100%;
+    width: 100%;
     display: flex;
+    flex-flow: column wrap;
     justify-content: center;
     align-items: center;
 }

@@ -222,7 +222,7 @@ function myProjects() {
         projectContainer.classList.add("project-container");
         let project = document.createElement("li");
         project.classList.add("project")
-        project.id = `project-num${i}`;
+        project.id = `project-num-${i}`;
         projectContainer.appendChild(project)
         let editSpan = document.createElement("span");
         editSpan.classList.add("edit-span");
@@ -265,10 +265,10 @@ let detailShower = () => {
         i++;
         spanTitle.addEventListener("click", () => {
             if (project.classList.contains("open")) {
-                let splitedProject = project.id.split('');
-                let id = splitedProject[splitedProject.length - 1];
-                if (document.querySelector(`#tasks-container${id}`)) {
-                    document.querySelector(`#tasks-container${id}`).remove();
+                let splitedProject = project.id.split('-');
+                let id = splitedProject[2];
+                if (document.querySelector(`#tasks-container-${id}`)) {
+                    document.querySelector(`#tasks-container-${id}`).remove();
                 }
                 project.classList.toggle("open")
                 project.style.height = "40px";
@@ -278,9 +278,9 @@ let detailShower = () => {
             project.style.height = `${100 + tasks.length * 50}px`;
             let tasksContainer = document.createElement("ul");
             tasksContainer.classList.add("tasks-container");
-            let splitedProject = project.id.split('');
-            let id = splitedProject[splitedProject.length - 1];
-            tasksContainer.id = `tasks-container${id}`;
+            let splitedProject = project.id.split('-');
+            let id = splitedProject[2];
+            tasksContainer.id = `tasks-container-${id}`;
             project.appendChild(tasksContainer);
             // set a input to add new tasks to each project
 

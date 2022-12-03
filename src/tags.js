@@ -13,12 +13,17 @@ export let creatTag = (tagName, tagColor) => {
 creatTag("Work", "green")
 creatTag("Study", "mediumpurple")
 creatTag("chores", "tomato")
-export let choosedTag;
+export let choosedTag = '';
 
 export let tagHub = () => {
     // make a Node for a specific Tag
     const showTag = (tagName, projectID, haveHover) => {
-        for (let i = 0; tags.length; i++) {
+        if(tagName === ''){
+            const tag = document.createElement("span");  
+            tag.classList.add("tag" , "empty");
+            return tag;
+        }
+        for (let i = 0; i < tags.length; i++) {
             if (tags[i].name === tagName) {
                 const tag = document.createElement("span");
                 tag.classList.add("tag");
