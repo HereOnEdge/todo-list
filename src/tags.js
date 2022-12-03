@@ -13,7 +13,7 @@ export let creatTag = (tagName, tagColor) => {
 creatTag("Work", "green")
 creatTag("Study", "mediumpurple")
 creatTag("chores", "tomato")
-export let choosedTag = '';
+export let choosedTag;
 
 export let tagHub = () => {
     // make a Node for a specific Tag
@@ -37,6 +37,7 @@ export let tagHub = () => {
         }
     };
     const addFullContainer = (projectID, parentNode) => {
+        choosedTag = '';
         const mainContainer = document.createElement("div");
         mainContainer.classList.add("tags-mainContainer");
         mainContainer.id = `tags-mainContainer-${projectID}`;
