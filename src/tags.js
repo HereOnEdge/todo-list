@@ -127,11 +127,26 @@ export let tagHub = () => {
     };
     return { showTag, addFullContainer, showTagOptions }
 }
-// make tags clickable so that on click they be the Tassk's Tag.
+// make tags clickable so that on click they be the Task's Tag.
 function __chooseTag(index, projectID) {
     let tagContainer = document.querySelector(`#tag-container-${index}-project-${projectID}`);
     const tag = document.querySelector(`#tag-${index}-project-${projectID}`);
     const tagObject = tags[index];
+    // if another Tag is already active, unActivate it
+    let activeTag = document.querySelector(".active");
+    if (activeTag === tagContainer){
+        tag.style.zIndex = "-1";
+        tag.removeChild(tag.firstChild);
+        activeTag.classList.remove("active");
+        return { active: '' };
+    }
+
+    if(activeTag){
+        console.log("removing apparently")
+        activeTag.classList.remove("active");
+        let activeFirstChild = activeTag.firstElementChild;
+        activeFirstChild.firstElementChild.remove();
+    }
     tagContainer.classList.toggle('active');
     if (tagContainer.classList.contains("active")) {
         // add a tick inside tag
@@ -141,9 +156,4 @@ function __chooseTag(index, projectID) {
         tag.appendChild(tick)
         tag.style.zIndex = "1";
         return { active: tagObject.name };
-    } else {
-        tag.style.zIndex = "-1";
-        tag.removeChild(tag.firstChild);
-        return { active: '' };
-    }
-}
+    } }
