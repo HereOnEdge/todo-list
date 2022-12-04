@@ -801,7 +801,6 @@ li.nav.open {
     height: min(70px, 10vh);
     width: clamp(35px , 10vw, 60px);
     right: clamp(-60px,-9vw,-30px);
-    /* right: -10vw; */
     top: min(calc(-2vh + 3px), -10px);
 }
 .triangle {
@@ -818,7 +817,8 @@ li.nav.open {
 }
 .edit-mainBox {
     position: relative;
-    min-height: 50%;
+    height: 60%;
+    width: 100%;
     background-color: var(--primary-color);
     border-radius: 10px;
     flex: 10 1 35px;
@@ -827,29 +827,23 @@ li.nav.open {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 5px;
     padding-left: 3px;
     box-shadow: 1px 1px 5px 0 var(--secondary-color);
 }
 .option {
     display: flex;
     align-items: center ;
-    width: 40%;
     aspect-ratio: 1/ 1;
-    border-radius: 20px;
-    flex: 0 1 auto;
+    border-radius: 50%;
+    flex: 1 1 auto;
 }
-.option:hover {
-    background-color: rgba(20,20,20,1);
+.del-button:hover {
+    background-color: var(--button-color);
 }
-.del-button:hover .icon svg{
-    color: var(--button-color);
-}
-.complete-button:hover .icon svg{
-    color: var(--complete-sign-color);
+.complete-button:hover{
+    background-color: var(--complete-sign-color);
 }
 .icon {
-    /* max-width: 80%; */
     display: flex;
     align-items: center;
     width: 90%;
@@ -857,12 +851,10 @@ li.nav.open {
     position: relative;
     margin: 0 auto;
     cursor: pointer;
-    /* object-fit: fill; */
 }
 .icon svg{
     width: 100%;
     height: 100%;
-    /* color:var(--forth-color); */
 }
 
 h2 {
@@ -922,7 +914,6 @@ input[type=text]:focus {
 }
 .arrow {
     width: 30px;
-    /* clip-path: polygon(10px at 10px 10px); */
     height: 30px;
     clip-path: polygon(
         50% 3px,
