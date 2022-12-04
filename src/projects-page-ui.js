@@ -570,6 +570,7 @@ let displayOptions = (index) => {
     let delButton = document.createElement("div");
     delButton.classList.add("del-button");
     delButton.classList.add("option");
+    delButton.id = `option-${projectArray[index].id}`;
     let removeIcon = document.createElement("div");
     removeIcon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
@@ -581,6 +582,7 @@ let displayOptions = (index) => {
     let completeButton = document.createElement("div");
     completeButton.classList.add("complete-button");
     completeButton.classList.add("option");
+    completeButton.id = `option-${projectArray[index].id}`;
     let doneIcon = document.createElement("div")
     doneIcon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16">
     <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/>
@@ -589,9 +591,21 @@ let displayOptions = (index) => {
     doneIcon.classList.add("icon");
     completeButton.appendChild(doneIcon);
     mainBox.appendChild(completeButton);
+    removeProject(projectArray[index].id)
     return openDots
 }
-
+// remove or complete the project on click on it's 3Dot button's options
+function removeProject(projectID) {
+    let removeButton = document.querySelector(".del-button");
+    removeButton.addEventListener("click", () => {
+        projectArray.splice(projectID, 1);
+        // change other project's IDs that still exist
+        for(let i =0; i < projectArray.length; i++){
+            projectArray[i].id = i;
+        }
+        myProjects();
+    })
+}
 // make a function to get and store new taaks
 
 // make a function to display how many days you have
