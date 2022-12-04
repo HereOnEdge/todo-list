@@ -809,7 +809,7 @@ li.nav.open {
     position: relative;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-bottom: 5px solid var(--forth-color);
+    border-bottom: 5px solid var(--secondary-color);
     rotate: -90deg;
     margin-right: -3px;
     width: 0;
@@ -818,28 +818,51 @@ li.nav.open {
 }
 .edit-mainBox {
     position: relative;
-    width: 100%;
-    background-color: var(--forth-color);
+    min-height: 50%;
+    background-color: var(--primary-color);
     border-radius: 10px;
     flex: 10 1 35px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
     gap: 5px;
     padding-left: 3px;
+    box-shadow: 1px 1px 5px 0 var(--secondary-color);
 }
 .option {
-    width: 45%;
-    aspect-ratio: 1 /1;
-    justify-content: stretch;
-    flex: 1 1 auto;
+    display: flex;
+    align-items: center ;
+    width: 40%;
+    aspect-ratio: 1/ 1;
+    border-radius: 20px;
+    flex: 0 1 auto;
+}
+.option:hover {
+    background-color: rgba(20,20,20,1);
+}
+.del-button:hover .icon svg{
+    color: var(--button-color);
+}
+.complete-button:hover .icon svg{
+    color: var(--complete-sign-color);
 }
 .icon {
-    max-width: 80%;
+    /* max-width: 80%; */
+    display: flex;
+    align-items: center;
+    width: 90%;
+    aspect-ratio: 1 /1;
     position: relative;
     margin: 0 auto;
-    object-fit: fill;
+    cursor: pointer;
+    /* object-fit: fill; */
+}
+.icon svg{
+    width: 100%;
+    height: 100%;
+    /* color:var(--forth-color); */
 }
 
 h2 {
