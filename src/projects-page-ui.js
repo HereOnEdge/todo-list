@@ -217,6 +217,9 @@ function myProjects() {
     bottomScreen.appendChild(title);
     bottomScreen.appendChild(projectsSection);
     for (let i = 0; i < projectArray.length; i++) {
+        if(projectArray[i].complete){
+            continue;
+        }
         let projectContainer = document.createElement("div");
         projectContainer.classList.add("project-container");
         let project = document.createElement("li");
