@@ -202,6 +202,9 @@ function myProjects() {
         document.querySelector(".myProjects").remove();
         document.querySelector(".bottom-title").remove();
     }
+    if (projectArray.length === 0){
+        return;
+    }
     let bottomScreen = document.querySelector(".bottom-screen");
     let projectsSection = document.createElement("div")
     projectsSection.classList.add("myProjects")
